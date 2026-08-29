@@ -47,7 +47,7 @@ export default function ListPage({ config }) {
       />
 
       {stats?.length ? (
-        <StatGroup cols={Math.min(stats.length, 4)} className="mb-5">
+        <StatGroup cols={Math.min(stats.length, 4)} className="mb-6">
           {stats.map((s) => (
             <KpiCard key={s.label} label={s.label} value={s.value} trend={s.trend} hint={s.hint} icon={s.icon} accent={s.accent} />
           ))}
