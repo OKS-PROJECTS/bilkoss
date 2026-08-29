@@ -61,15 +61,17 @@ export default function EcommerceDashboard() {
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
         {/* KPI block — 2x2 */}
         <div className="grid grid-cols-2 gap-6">
-          <Surface bodyClassName="p-5">
-            <h3 className="text-[13.5px] leading-tight font-semibold tracking-wide uppercase" style={{ color: 'var(--app-fg-subtle)' }}>
-              Good Day,
-            </h3>
-            <p className="mt-1 text-[19px] font-bold" style={{ color: 'var(--app-fg-strong)' }}>
-              David Dev!
-            </p>
+          <Surface padded={false} className="overflow-hidden">
+            <div className="p-5">
+              <h3 className="text-[14px] font-semibold tracking-[0.04em] uppercase" style={{ color: 'var(--app-fg-subtle)' }}>
+                Good Day,
+              </h3>
+              <p className="font-display mt-2 text-[24px] leading-tight font-bold" style={{ color: 'var(--app-fg-strong)' }}>
+                David Dev!
+              </p>
+            </div>
             <div
-              className="mt-4 flex flex-col gap-1.5 rounded-md px-3 py-2 text-[12.5px]"
+              className="flex items-center justify-between gap-2 px-5 py-3 text-[12.5px] font-semibold"
               style={{ background: 'var(--app-surface-2)', color: 'var(--app-fg-muted)' }}
             >
               <span className="flex items-center gap-1.5">
