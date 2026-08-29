@@ -62,6 +62,18 @@ const p = {
   '/apps/more/todo': lazy(() => demo().then(D('TodoApp'))),
   '/apps/more/pin-board': lazy(() => demo().then(D('PinBoard'))),
   '/apps/users/permissions': lazy(() => demo().then(D('PermissionsMatrix'))),
+
+  '/apps/ecommerce/cart': lazy(() => import('./Ecommerce/EcomExtras').then(D('Cart'))),
+  '/apps/ecommerce/checkout': lazy(() => import('./Ecommerce/EcomExtras').then(D('Checkout'))),
+  '/apps/ecommerce/products-grid': lazy(() => import('./Ecommerce/EcomExtras').then(D('ProductsGrid'))),
+
+  '/forms/elements': lazy(() => import('./FormsShowcase')),
+  '/forms/validation': lazy(() => import('./FormsShowcase')),
+  '/forms/wizard': lazy(() => import('./FormsShowcase')),
+  '/forms/pickers': lazy(() => import('./FormsShowcase')),
+  '/forms/uploads': lazy(() => import('./FormsShowcase')),
+  '/forms/editor': lazy(() => import('./FormsShowcase')),
+  '/forms/layouts': lazy(() => import('./FormsShowcase')),
 }
 
 export const bespokeRoutePaths = Object.keys(p)

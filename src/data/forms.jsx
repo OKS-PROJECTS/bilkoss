@@ -3,6 +3,32 @@ const bc = (group, leaf) => [{ label: 'Bilkoss', to: '/' }, { label: group }, { 
 const f = (type, name, label, extra = {}) => ({ type, name, label, ...extra })
 
 export const FORM_CONFIGS = {
+  '/apps/hrm/salary-slip': {
+    title: 'Create Salary Slip',
+    breadcrumbs: bc('HRM', 'Create Salary Slip'),
+    submitLabel: 'Generate slip',
+    groups: [
+      {
+        title: 'Employee & period',
+        fields: [
+          f('select', 'employee', 'Employee', { required: true, options: ['Alicia Diaz', 'Marcus Cole', 'Rae Shaw', 'Kendall Ward'].map((v) => ({ label: v, value: v })) }),
+          f('select', 'month', 'Pay period', { options: ['August 2026', 'July 2026', 'June 2026'].map((v) => ({ label: v, value: v })) }),
+          f('datepicker', 'payDate', 'Payment date'),
+          f('select', 'method', 'Method', { options: [{ label: 'Bank transfer', value: 'ach' }, { label: 'Wire', value: 'wire' }] }),
+        ],
+      },
+      {
+        title: 'Earnings & deductions',
+        fields: [
+          f('number', 'basic', 'Basic salary', { props: { prefix: '$' } }),
+          f('number', 'allowance', 'Allowances', { props: { prefix: '$' } }),
+          f('number', 'tax', 'Tax withheld', { props: { prefix: '$' } }),
+          f('number', 'other', 'Other deductions', { props: { prefix: '$' } }),
+        ],
+      },
+      { title: 'Notes', fields: [f('textarea', 'notes', 'Notes on the slip', { full: true })] },
+    ],
+  },
   '/apps/ecommerce/product-add': {
     title: 'Add Product',
     breadcrumbs: bc('Ecommerce', 'Add Product'),

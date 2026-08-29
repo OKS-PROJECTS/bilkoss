@@ -6,6 +6,29 @@ const bc = (group, leaf) => [{ label: 'Bilkoss', to: '/' }, { label: group }, { 
 const rows = (n, fn) => Array.from({ length: n }, (_, i) => fn(i))
 
 export const EXTRA_LIST_CONFIGS = {
+  '/apps/tasks/list': {
+    title: 'Task List', breadcrumbs: bc('Tasks', 'Task List'), searchKeys: ['title', 'assignee'], selectable: true,
+    filters: [
+      { label: 'In progress', test: (r) => r.status === 'In Progress' },
+      { label: 'Done', test: (r) => r.status === 'Done' },
+      { label: 'High priority', test: (r) => r.priority === 'High' },
+    ],
+    columns: [
+      { key: 'title', header: 'Task', render: (r) => <span className="font-medium" style={{ color: 'var(--app-fg-strong)' }}>{r.title}</span> },
+      { key: 'project', header: 'Project' },
+      { key: 'assignee', header: 'Assignee', render: (r) => <EntityCell name={r.assignee} seed={r.assignee} /> },
+      { key: 'priority', header: 'Priority', render: (r) => <StatusChip status={r.priority === 'High' ? 'Overdue' : r.priority === 'Medium' ? 'Pending' : 'Completed'} /> },
+      { key: 'due', header: 'Due', sortable: true },
+      { key: 'status', header: 'Status', render: (r) => <StatusChip status={r.status} /> },
+    ],
+    rows: rows(18, (i) => ({
+      id: `TASK-${1200 + i}`,
+      title: ['Fix checkout race condition', 'Write migration guide', 'Add dark-mode tokens', 'QA pass on invoices', 'Refactor auth guard', 'Update dependency lockfile', 'Draft Q3 roadmap', 'Instrument funnel events', 'Audit third-party scripts', 'Rebuild settings screen'][i % 10],
+      project: ['Billing v2', 'Design system', 'Mobile app revamp', 'API gateway'][i % 4],
+      assignee: D.person(i), priority: ['High', 'Medium', 'Low'][i % 3],
+      due: fmtDate(daysAgo(-(2 + i * 2))), status: ['In Progress', 'Review', 'Todo', 'Done'][i % 4],
+    })),
+  },
   '/apps/ecommerce/sellers': {
     title: 'Sellers', breadcrumbs: bc('Ecommerce', 'Sellers'), searchKeys: ['name'],
     columns: [
