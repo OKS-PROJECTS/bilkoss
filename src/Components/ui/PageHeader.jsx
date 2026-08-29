@@ -17,7 +17,7 @@ export function Breadcrumbs({ items = [] }) {
               ) : (
                 <span style={last ? { color: 'var(--app-fg)' } : undefined}>{it.label}</span>
               )}
-              {!last && <ChevronRight size={13} className="opacity-60" />}
+              {!last && <ChevronRight size={13} className="opacity-50" />}
             </li>
           )
         })}
@@ -27,13 +27,13 @@ export function Breadcrumbs({ items = [] }) {
 }
 
 /**
- * The title band the reference shows on every inner page:
- * page title left, breadcrumb trail right, optional actions row.
+ * The title band the reference shows on every inner page: page title left,
+ * breadcrumb trail right. Optional actions sit left of the breadcrumb.
  */
 export default function PageHeader({ title, breadcrumbs, actions, className }) {
   return (
-    <div className={clsx('mb-5 flex flex-wrap items-center justify-between gap-3', className)}>
-      <h1 className="text-[18px] font-semibold" style={{ color: 'var(--app-fg-strong)' }}>
+    <div className={clsx('mb-6 flex min-h-[36px] flex-wrap items-center justify-between gap-3', className)}>
+      <h1 className="text-[16px] font-bold" style={{ color: 'var(--app-fg-strong)', fontFamily: 'var(--app-font)' }}>
         {title}
       </h1>
       <div className="flex flex-wrap items-center gap-3">

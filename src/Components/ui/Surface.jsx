@@ -25,12 +25,12 @@ export function Surface({ as: As = 'div', className, bodyClassName, padded = tru
 export function CardHeader({ title, subtitle, actions, divider = true, className }) {
   return (
     <div
-      className={clsx('flex items-start justify-between gap-3 px-5 pt-5', divider && 'pb-4', className)}
-      style={divider ? { borderBottom: '1px solid var(--app-border)' } : undefined}
+      className={clsx('flex items-center justify-between gap-3 px-5 py-[15px]', className)}
+      style={divider ? { borderBottom: '1px dashed var(--app-border)' } : undefined}
     >
       <div className="min-w-0">
         {typeof title === 'string' ? (
-          <h3 className="text-[15px] font-semibold" style={{ color: 'var(--app-fg-strong)' }}>
+          <h3 className="text-[15px] font-medium" style={{ color: 'var(--app-fg-strong)' }}>
             {title}
           </h3>
         ) : (

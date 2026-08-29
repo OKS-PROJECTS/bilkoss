@@ -17,8 +17,14 @@ export default function DonutCard({
 }) {
   const total = data.reduce((s, d) => s + d.value, 0)
   return (
-    <div className={clsx('flex flex-col items-center gap-4 sm:flex-row sm:justify-between', className)}>
-      <div className="donut-no-center relative shrink-0" style={{ width: height, maxWidth: '100%' }}>
+    <div
+      className={clsx(
+        'flex flex-col items-center gap-5',
+        legend && 'sm:flex-row sm:justify-between',
+        className,
+      )}
+    >
+      <div className="donut-no-center relative mx-auto shrink-0" style={{ width: height, maxWidth: '100%' }}>
         <Chart
           type="donut"
           data={data}
@@ -27,7 +33,7 @@ export default function DonutCard({
           height={height}
           palette={{ roles }}
           legend={false}
-          pie={{ innerRadius: 0.68 }}
+          pie={{ innerRadius: 0.74 }}
         />
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-[12px] font-medium uppercase tracking-wide" style={{ color: 'var(--app-fg-muted)' }}>

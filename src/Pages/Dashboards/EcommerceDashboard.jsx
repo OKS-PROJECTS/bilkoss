@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Button } from 'oks-ui'
-import { ShoppingCart, DollarSign, TrendingUp, RotateCcw } from 'lucide-react'
+import { Button, Chart, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from 'oks-ui'
+import { ShoppingCart, DollarSign, TrendingUp, CalendarDays, Clock, RefreshCw, MoreVertical, Star, Upload, Download } from 'lucide-react'
 import {
   PageHeader,
   Panel,
-
+  Surface,
   KpiCard,
   DataTable,
   ChartCard,
@@ -14,21 +14,15 @@ import {
   Timeline,
 } from '../../Components/ui'
 import SegmentedControl from '../../Components/ui/SegmentedControl'
-import { money } from '../../lib/format'
-import {
-  topProducts,
-  orders,
-  salesByMonth,
-  trafficChannels,
-  revenueByLocation,
-  recentActivity,
-} from '../../data/ecommerce'
+import { money, fmtDate } from '../../lib/format'
+import { topProducts, orders, salesByMonth, recentActivity, revenueByLocation } from '../../data/ecommerce'
+
+const now = new Date(2026, 7, 29, 17, 44)
 
 const KPIS = [
-  { label: 'Orders', value: '4,680', trend: -1.89, hint: 'vs last month', icon: <ShoppingCart size={18} />, accent: 'primary', spark: [12, 18, 14, 22, 19, 26, 24, 30] },
-  { label: 'Revenue', value: '$36.10k', trend: -5.23, hint: 'vs last month', icon: <DollarSign size={18} />, accent: 'success', spark: [30, 28, 33, 31, 26, 24, 27, 25] },
-  { label: 'Growth', value: '+12.04%', trend: 4.87, hint: 'vs last month', icon: <TrendingUp size={18} />, accent: 'info', spark: [8, 9, 11, 10, 13, 12, 15, 17] },
-  { label: 'Refunds', value: '312', trend: 2.1, invertTrend: true, hint: 'vs last month', icon: <RotateCcw size={18} />, accent: 'warning', spark: [5, 4, 6, 5, 7, 6, 8, 7] },
+  { label: 'Orders', value: '4,680', trend: -1.89, icon: <ShoppingCart size={18} />, accent: 'primary' },
+  { label: 'Revenue', value: '$36.10k', trend: -5.23, icon: <DollarSign size={18} />, accent: 'success' },
+  { label: 'Growth', value: '+12.04%', trend: 4.87, icon: <TrendingUp size={18} />, accent: 'info' },
 ]
 
 const ORDER_COLS = [
@@ -48,125 +42,191 @@ const PROD_COLS = [
   { key: 'stock', header: 'Stock', render: (r) => <StatusChip status={r.stock} /> },
 ]
 
+const weekly = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => ({
+  day,
+  orders: 42 + ((i * 17) % 38),
+  refunds: 8 + ((i * 5) % 14),
+}))
+
 export default function EcommerceDashboard() {
-  const [metric, setMetric] = useState('revenue')
+  const [range, setRange] = useState('monthly')
+
   return (
     <>
       <PageHeader
-        title="E-Commerce"
-        breadcrumbs={[{ label: 'Bilkoss', to: '/' }, { label: 'Dashboards' }, { label: 'E-Commerce' }]}
+        title="eCommerce"
+        breadcrumbs={[{ label: 'Bilkoss', to: '/' }, { label: 'Dashboard' }, { label: 'eCommerce' }]}
       />
 
-      <div className="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-4">
-        <Panel className="lg:col-span-1" title="Good day, David">
-          <p className="text-[13px]" style={{ color: 'var(--app-fg-muted)' }}>
-            Here is what is happening with your store today.
-          </p>
-          <div className="mt-4 space-y-2 text-[13px]">
-            <div className="flex justify-between"><span style={{ color: 'var(--app-fg-muted)' }}>Today's earnings</span><span className="font-semibold" style={{ color: 'var(--app-fg-strong)' }}>$8,975.30</span></div>
-            <div className="flex justify-between"><span style={{ color: 'var(--app-fg-muted)' }}>New customers</span><span className="font-semibold" style={{ color: 'var(--app-fg-strong)' }}>46</span></div>
-            <div className="flex justify-between"><span style={{ color: 'var(--app-fg-muted)' }}>Conversion</span><span className="font-semibold" style={{ color: 'var(--app-fg-strong)' }}>3.24%</span></div>
-          </div>
-        </Panel>
-        <div className="grid grid-cols-2 gap-5 lg:col-span-3 lg:grid-cols-3">
-          {KPIS.slice(0, 3).map((k) => (
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+        {/* KPI block — 2x2 */}
+        <div className="grid grid-cols-2 gap-6">
+          <Surface bodyClassName="p-5">
+            <h3 className="text-[13.5px] leading-tight font-semibold tracking-wide uppercase" style={{ color: 'var(--app-fg-subtle)' }}>
+              Good Day,
+            </h3>
+            <p className="mt-1 text-[19px] font-bold" style={{ color: 'var(--app-fg-strong)' }}>
+              David Dev!
+            </p>
+            <div
+              className="mt-4 flex flex-col gap-1.5 rounded-md px-3 py-2 text-[12.5px]"
+              style={{ background: 'var(--app-surface-2)', color: 'var(--app-fg-muted)' }}
+            >
+              <span className="flex items-center gap-1.5">
+                <CalendarDays size={14} /> {fmtDate(now)}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock size={14} /> 5:44 PM
+              </span>
+            </div>
+          </Surface>
+          {KPIS.map((k) => (
             <KpiCard key={k.label} {...k} />
           ))}
         </div>
-      </div>
 
-      <div className="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-3">
-        <ChartCard
-          className="lg:col-span-2"
-          title="Sales Report"
-          subtitle="25,822 orders this period"
+        <Panel
+          title="Store Performance Analytics"
           actions={
-            <SegmentedControl
-              options={[
-                { key: 'revenue', label: 'Revenue' },
-                { key: 'orders', label: 'Orders' },
-              ]}
-              value={metric}
-              onChange={setMetric}
-            />
+            <Button size="sm" variant="bordered" color="default" startContent={<RefreshCw size={13} />}>
+              Refresh
+            </Button>
           }
-          type="area"
-          data={salesByMonth}
-          x="month"
-          series={[{ key: metric, name: metric === 'revenue' ? 'Revenue' : 'Orders' }]}
-          palette={{ roles: [metric === 'revenue' ? 'primary' : 'info'] }}
-          dataFormat={metric === 'revenue' ? { prefix: '$', suffix: 'k' } : undefined}
-          height={300}
-        />
-        <Panel title="Store Performance">
+        >
           <DonutCard
             centerLabel="Total"
             centerValue="140"
+            height={210}
+            legend={false}
             data={[
               { label: 'Completed', value: 78 },
               { label: 'Pending', value: 34 },
               { label: 'Cancelled', value: 28 },
             ]}
-            roles={['success', 'warning', 'danger']}
+            roles={['primary', 'warning', 'info']}
           />
+          <p className="mt-3 flex items-center justify-center gap-1 text-[12px] font-medium" style={{ color: 'var(--app-danger)' }}>
+            <Star size={12} fill="currentColor" /> Poor sales
+          </p>
         </Panel>
-      </div>
 
-      <div className="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-3">
         <ChartCard
-          className="lg:col-span-2"
           title="Weekly Performance Insights"
-          type="column"
-          data={salesByMonth.slice(0, 7).map((d, i) => ({ day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i], orders: d.orders, refunds: Math.round(d.orders * 0.18) }))}
+          actions={
+            <Dropdown placement="bottom-end">
+              <DropdownTrigger>
+                <Button isIconOnly size="sm" variant="ghost" color="default" aria-label="Options">
+                  <MoreVertical size={16} />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Widget options">
+                <DropdownItem itemKey="refresh">Refresh data</DropdownItem>
+                <DropdownItem itemKey="download">Download report</DropdownItem>
+                <DropdownItem itemKey="share">Share insights</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          }
+          type="bar"
+          data={weekly}
           x="day"
-          series={[
-            { key: 'orders', name: 'Orders' },
-            { key: 'refunds', name: 'Refunds' },
-          ]}
-          palette={{ roles: ['primary', 'warning'] }}
-          height={280}
+          series={[{ key: 'orders', name: 'Orders' }]}
+          palette={{ roles: ['primary'] }}
+          bar={{ radius: 3 }}
+          legend={false}
+          height={260}
         />
-        <Panel title="Traffic Channels">
-          <DonutCard
-            centerLabel="Sessions"
-            centerValue="128k"
-            data={trafficChannels}
-            roles={['primary', 'info', 'secondary', 'warning', 'success']}
-          />
-        </Panel>
       </div>
 
-      <Panel
-        className="mb-5"
-        title="Top Selling Products"
-        actions={<Button size="sm" variant="bordered" color="default">View all</Button>}
-      >
-        <DataTable columns={PROD_COLS} rows={topProducts} pageSize={6} />
-      </Panel>
-
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Panel
-          className="lg:col-span-2"
-          title="Recent Orders"
-          actions={<Button size="sm" variant="bordered" color="default">Export</Button>}
+          title={<>Sales Report <span className="font-normal" style={{ color: 'var(--app-fg-subtle)' }}>(25,822 Orders)</span></>}
+          actions={
+            <SegmentedControl
+              options={[
+                { key: 'today', label: 'Today' },
+                { key: 'monthly', label: 'Monthly' },
+                { key: 'annual', label: 'Annual' },
+              ]}
+              value={range}
+              onChange={setRange}
+            />
+          }
         >
-          <DataTable columns={ORDER_COLS} rows={orders.slice(0, 8)} pageSize={5} />
-        </Panel>
-        <Panel title="Recent Activity">
-          <Timeline items={recentActivity} />
-        </Panel>
-      </div>
-
-      <div className="mt-5">
-        <Panel title="Revenue by Location">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
-            {revenueByLocation.map((r) => (
-              <div key={r.label} className="flex items-center justify-between border-b py-2 text-[13px]" style={{ borderColor: 'var(--app-border)' }}>
-                <span style={{ color: 'var(--app-fg)' }}>{r.label}</span>
-                <span className="font-semibold" style={{ color: 'var(--app-fg-strong)' }}>{money(r.value, { compact: true })}</span>
+          <div className="mb-4 grid grid-cols-3 gap-3">
+            {[
+              { label: 'Revenue', value: '$78,224.68', icon: <DollarSign size={13} />, trend: '+5.2%' },
+              { label: 'Orders', value: '8,541', icon: <ShoppingCart size={13} />, trend: '+3.1%' },
+              { label: 'Growth Rate', value: '25.30%', icon: <TrendingUp size={13} />, trend: '+4.8%' },
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="text-[12px] font-medium" style={{ color: 'var(--app-fg-muted)' }}>{s.label}</p>
+                <p className="mt-1 flex items-center gap-1.5 text-[15px] font-bold" style={{ color: 'var(--app-fg-strong)' }}>
+                  <span style={{ color: 'var(--app-success)' }}>{s.icon}</span>
+                  {s.value}
+                </p>
               </div>
             ))}
           </div>
+          <Chart
+            type="area"
+            data={salesByMonth}
+            x="month"
+            series={[
+              { key: 'revenue', name: 'Total Revenue' },
+              { key: 'orders', name: 'Orders' },
+            ]}
+            palette={{ roles: ['primary', 'secondary'] }}
+            height={280}
+            legend={{ position: 'bottom' }}
+            grid={{ horizontal: true, vertical: false }}
+            axisY={{ show: false }}
+            line={{ curve: 'smooth', point: { show: false }, area: { show: true, fill: { opacity: 0.14 } } }}
+          />
+        </Panel>
+
+        <Panel
+          title="Top Selling Products"
+          actions={
+            <div className="flex gap-2">
+              <Button size="sm" variant="bordered" color="default" startContent={<Upload size={13} />}>Import</Button>
+              <Button size="sm" variant="bordered" color="default" startContent={<Download size={13} />}>Export</Button>
+            </div>
+          }
+        >
+          <DataTable columns={PROD_COLS} rows={topProducts} pageSize={6} />
+        </Panel>
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-12">
+        <Panel
+          className="xl:col-span-5"
+          title={<>Recent Orders <span className="font-normal" style={{ color: 'var(--app-fg-subtle)' }}>(186.25k Transactions)</span></>}
+          actions={<Button size="sm" variant="bordered" color="default" startContent={<Download size={13} />}>Export</Button>}
+        >
+          <DataTable columns={ORDER_COLS} rows={orders.slice(0, 8)} pageSize={5} />
+        </Panel>
+
+        <Panel className="xl:col-span-4" title="Revenue by Locations">
+          <div
+            className="mb-4 rounded-md p-3 text-[13px]"
+            style={{ background: 'var(--app-primary-soft)', color: 'var(--app-primary)' }}
+          >
+            <strong>Congratulations!</strong> You've just hit a new record — <strong>25.9k orders</strong> this month.
+          </div>
+          <ul className="space-y-3">
+            {revenueByLocation.map((r) => (
+              <li key={r.label} className="flex items-center justify-between border-b pb-2 text-[13px]" style={{ borderColor: 'var(--app-border)' }}>
+                <span style={{ color: 'var(--app-fg)' }}>{r.label}</span>
+                <span className="font-semibold" style={{ color: 'var(--app-fg-strong)' }}>
+                  {money(r.value, { compact: true })} Revenue
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+
+        <Panel className="xl:col-span-3" title="Recent Activity">
+          <Timeline items={recentActivity} />
         </Panel>
       </div>
     </>

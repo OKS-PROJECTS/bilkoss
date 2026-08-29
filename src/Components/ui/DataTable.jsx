@@ -78,12 +78,9 @@ export default function DataTable({
   return (
     <div className={clsx('flex flex-col gap-4', className)}>
       <div className="w-full overflow-x-auto">
-        <table className="w-full border-collapse text-[13px]">
-          <thead
-            className={clsx(stickyHeader && 'sticky top-0 z-10')}
-            style={{ background: 'var(--app-surface-2)' }}
-          >
-            <tr>
+        <table className="w-full border-collapse text-[13.5px]">
+          <thead className={clsx(stickyHeader && 'sticky top-0 z-10')} style={{ background: 'var(--app-surface)' }}>
+            <tr style={{ borderBottom: '1px solid var(--app-border)' }}>
               {selectable && (
                 <th className={clsx(cellPad, 'w-10')}>
                   <Checkbox
