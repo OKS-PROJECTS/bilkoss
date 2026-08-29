@@ -21,7 +21,7 @@ export default function DonutCard({
 }) {
   const total = data.reduce((s, d) => s + d.value, 0) || 1
   const size = legend ? Math.min(height, 200) : height
-  const stroke = size * 0.14
+  const stroke = size * 0.185
   const r = (size - stroke) / 2
   const c = 2 * Math.PI * r
   const colOf = (i) => (colors ? colors[i % colors.length] : `var(--oks-color-${roles[i % roles.length]}-500)`)

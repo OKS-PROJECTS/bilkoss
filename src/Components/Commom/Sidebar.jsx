@@ -25,7 +25,7 @@ function NavLeaf({ node, depth, onNavigate }) {
       className={({ isActive }) =>
         clsx(
           'flex items-center gap-3 rounded-[5px] transition-colors',
-          depth === 0 ? 'px-2.5 py-2.5 text-[13.5px]' : 'py-[7px] pr-2.5 text-[12.75px]',
+          depth === 0 ? 'px-2.5 py-[9px] text-[14px]' : 'py-[7px] pr-2.5 text-[13px]',
           'hover:text-[var(--app-menu-hover-fg)]',
           !isActive && 'hover:bg-[var(--app-menu-hover-bg)]',
         )
@@ -58,7 +58,7 @@ function NavGroup({ node, depth, onNavigate }) {
         }}
         className={clsx(
           'flex w-full items-center gap-3 rounded-[5px] transition-colors',
-          depth === 0 ? 'px-2.5 py-2.5 text-[13.5px]' : 'py-[7px] pr-2.5 text-[12.75px]',
+          depth === 0 ? 'px-2.5 py-[9px] text-[14px]' : 'py-[7px] pr-2.5 text-[13px]',
           'hover:text-[var(--app-menu-hover-fg)]',
           !pathActive && 'hover:bg-[var(--app-menu-hover-bg)]',
         )}
