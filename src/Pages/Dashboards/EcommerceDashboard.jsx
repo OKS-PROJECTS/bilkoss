@@ -96,17 +96,17 @@ export default function EcommerceDashboard() {
           <DonutCard
             centerLabel="Total"
             centerValue="140"
-            height={210}
+            height={220}
             legend={false}
             data={[
               { label: 'Completed', value: 78 },
               { label: 'Pending', value: 34 },
               { label: 'Cancelled', value: 28 },
             ]}
-            roles={['primary', 'warning', 'info']}
+            colors={['var(--oks-color-primary-500)', 'var(--app-warn)', 'var(--app-border-strong)']}
           />
-          <p className="mt-3 flex items-center justify-center gap-1 text-[12px] font-medium" style={{ color: 'var(--app-danger)' }}>
-            <Star size={12} fill="currentColor" /> Poor sales
+          <p className="mt-4 flex items-center justify-center gap-1.5 text-[12px] font-semibold tracking-wide uppercase" style={{ color: 'var(--app-danger)' }}>
+            <Star size={12} fill="currentColor" /> Poor Sales
           </p>
         </Panel>
 
@@ -180,7 +180,7 @@ export default function EcommerceDashboard() {
             legend={{ position: 'bottom' }}
             grid={{ horizontal: true, vertical: false }}
             axisY={{ show: false }}
-            line={{ curve: 'smooth', point: { show: false }, area: { show: true, fill: { opacity: 0.14 } } }}
+            line={{ curve: 'smooth', markers: { size: 0 }, area: { show: true, fill: { opacity: 0.14 } } }}
           />
         </Panel>
 

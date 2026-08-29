@@ -5,10 +5,11 @@
    ONLY --app-* tokens.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap');
 
 :root {
   --app-font: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --app-font-display: 'Figtree', 'Nunito', system-ui, sans-serif;
   --oks-font-family-base: var(--app-font);
   --oks-font-family-sans: var(--app-font);
 
@@ -268,8 +269,32 @@ body {
   background: var(--app-surface-2) !important;
 }
 
+/* header search: full rounded pill on a subtle fill */
+.seg-search .oksTextField input,
+.seg-search .oksTextField [data-slot='control'] {
+  border-radius: 9999px !important;
+  background: var(--app-surface-2) !important;
+  border-color: transparent !important;
+}
+
 /* keep native scrollbars unobtrusive */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--app-border-strong) transparent;
+}
+
+/* sidebar / nav links: no browser focus box; keyboard focus gets a subtle ring */
+.app-sidebar a,
+.app-sidebar button {
+  outline: none;
+}
+.app-sidebar a:focus-visible,
+.app-sidebar button:focus-visible {
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.28);
+}
+
+/* headings use the display face */
+h1, h2, h3, h4, h5, h6,
+.font-display {
+  font-family: var(--app-font-display, var(--app-font));
 }

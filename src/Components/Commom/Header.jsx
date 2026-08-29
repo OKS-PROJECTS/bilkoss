@@ -20,6 +20,8 @@ import {
   Grid3x3,
   Maximize,
   Settings,
+  Palette,
+  Globe,
   LogOut,
   User,
   LayoutDashboard,
@@ -84,18 +86,26 @@ export default function Header({ onOpenSidebar }) {
         <Menu size={18} />
       </Button>
 
-      <div className="hidden w-full max-w-xs md:block">
-        <TextField
-          type="search"
-          size="sm"
-          variant="soft"
-          placeholder="Search…"
-          startIcon={<Search size={15} />}
-          aria-label="Global search"
-        />
+      <div className="hidden w-full max-w-sm md:block">
+        <div className="seg-search">
+          <TextField
+            type="search"
+            size="sm"
+            variant="soft"
+            radius="full"
+            placeholder="Quick Search…"
+            startIcon={<Search size={15} />}
+            aria-label="Global search"
+          />
+        </div>
       </div>
 
-      <div className="ml-auto flex items-center gap-1">
+      <nav className="ml-6 hidden items-center gap-5 text-[13.5px] font-medium lg:flex" style={{ color: 'var(--app-fg-muted)' }}>
+        <span className="cursor-pointer hover:text-[var(--app-fg-strong)]">Mega Menu</span>
+        <span className="cursor-pointer hover:text-[var(--app-fg-strong)]">Apps</span>
+      </nav>
+
+      <div className="ml-auto flex items-center gap-0.5">
         <Tooltip content={dark ? 'Light mode' : 'Dark mode'}>
           <Button isIconOnly variant="ghost" color="default" size="sm" aria-label="Toggle theme" onPress={toggle}>
             {dark ? <Sun size={18} /> : <Moon size={18} />}
@@ -154,6 +164,34 @@ export default function Header({ onOpenSidebar }) {
             <Maximize size={17} />
           </Button>
         </Tooltip>
+
+        <Button isIconOnly variant="ghost" color="default" size="sm" aria-label="Theme customizer" className="hidden md:inline-flex">
+          <Palette size={17} />
+        </Button>
+        <Button
+          isIconOnly
+          variant="ghost"
+          color="default"
+          size="sm"
+          aria-label="Settings"
+          className="hidden md:inline-flex"
+          onPress={() => navigate('/apps/users/account-settings')}
+        >
+          <Settings size={17} />
+        </Button>
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Button variant="ghost" color="default" size="sm" aria-label="Language" className="hidden gap-1 sm:inline-flex">
+              <Globe size={16} /> <span className="text-[12px] font-semibold">EN</span>
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Language">
+            <DropdownItem itemKey="en">English</DropdownItem>
+            <DropdownItem itemKey="es">Español</DropdownItem>
+            <DropdownItem itemKey="de">Deutsch</DropdownItem>
+            <DropdownItem itemKey="fr">Français</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
 
         <Dropdown placement="bottom-end">
           <DropdownTrigger>

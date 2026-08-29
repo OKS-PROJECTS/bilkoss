@@ -12,6 +12,7 @@ export default function DonutCard({
   centerValue,
   height = 240,
   roles = ['primary', 'info', 'warning', 'success', 'danger', 'secondary'],
+  colors,
   legend = true,
   className,
 }) {
@@ -32,9 +33,9 @@ export default function DonutCard({
           x="label"
           series={{ key: 'value', name: 'Share' }}
           height={chartSize}
-          palette={{ roles }}
+          palette={colors ? { colors } : { roles }}
           legend={false}
-          pie={{ innerRadius: 0.74 }}
+          pieStyle={{ innerRatio: 0.78, gap: 2 }}
         />
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-[12px] font-medium uppercase tracking-wide" style={{ color: 'var(--app-fg-muted)' }}>
@@ -52,7 +53,7 @@ export default function DonutCard({
               <span className="flex items-center gap-2 truncate" style={{ color: 'var(--app-fg)' }}>
                 <span
                   className="h-2.5 w-2.5 shrink-0 rounded-sm"
-                  style={{ background: `var(--oks-color-${roles[i % roles.length]}-500)` }}
+                  style={{ background: colors ? colors[i % colors.length] : `var(--oks-color-${roles[i % roles.length]}-500)` }}
                 />
                 <span className="truncate">{d.label}</span>
               </span>

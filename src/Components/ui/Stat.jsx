@@ -53,27 +53,9 @@ export function KpiCard({ label, value, trend, trendSuffix = '%', invertTrend = 
   return (
     <Surface bodyClassName="p-5">
       <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h5 className="text-[13.5px] font-semibold tracking-wide uppercase" style={{ color: 'var(--app-fg-subtle)' }}>
-            {label}
-          </h5>
-          <p className="my-2.5 text-[26px] leading-none font-bold" style={{ color: 'var(--app-fg-strong)' }}>
-            {value}
-          </p>
-          {trend != null && (
-            <p className="mb-0 flex items-center gap-1.5 text-[12.5px]" style={{ color: 'var(--app-fg-muted)' }}>
-              <span
-                className="inline-flex items-center gap-0.5 font-semibold"
-                style={{ color: good ? 'var(--app-success)' : 'var(--app-danger)' }}
-              >
-                <Arrow size={14} />
-                {Math.abs(trend)}
-                {trendSuffix}
-              </span>
-              <span className="whitespace-nowrap">{hint}</span>
-            </p>
-          )}
-        </div>
+        <h5 className="text-[13px] font-semibold tracking-[0.03em] uppercase" style={{ color: 'var(--app-fg-subtle)' }}>
+          {label}
+        </h5>
         {icon && (
           <span
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[19px]"
@@ -83,6 +65,22 @@ export function KpiCard({ label, value, trend, trendSuffix = '%', invertTrend = 
           </span>
         )}
       </div>
+      <p className="font-display mt-4 text-[28px] leading-none font-bold" style={{ color: 'var(--app-fg-strong)' }}>
+        {value}
+      </p>
+      {trend != null && (
+        <p className="mt-3 mb-0 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12.5px]" style={{ color: 'var(--app-fg-muted)' }}>
+          <span
+            className="inline-flex items-center gap-0.5 font-semibold"
+            style={{ color: good ? 'var(--app-success)' : 'var(--app-danger)' }}
+          >
+            <Arrow size={14} />
+            {Math.abs(trend)}
+            {trendSuffix}
+          </span>
+          <span className="whitespace-nowrap">{hint}</span>
+        </p>
+      )}
     </Surface>
   )
 }
