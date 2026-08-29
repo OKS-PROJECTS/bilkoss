@@ -56,7 +56,7 @@ function ElementsBody() {
 function ValidationBody() {
   const toast = useToast()
   return (
-    <Panel title="Validation" subtitle="Rules via oks-ui validation utilities — no zod, no react-hook-form">
+    <Panel title="Validation" subtitle="Rules via oks-ui validation utilities — no external validation or form library">
       <Form onSubmit={() => toast.success('Valid — submitted')} validationMode="blur" className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <FormFieldSet type="text" name="name" label="Name (required)" validation={{ rules: { required: true, minLength: 2 } }} />
         <FormFieldSet type="email" name="email" label="Email (required, format)" validation={{ rules: { required: true, email: true } }} />

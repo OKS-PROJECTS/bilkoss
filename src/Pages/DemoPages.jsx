@@ -416,7 +416,7 @@ export function BlogArticle() {
 export function ForumView() {
   const threads = Array.from({ length: 10 }, (_, i) => ({
     id: i,
-    title: ['Best practice for multi-tenant theming?', 'How do you handle stale HMR in Vite 8?', 'Show & tell: our onboarding flow', 'Feature request: saved table views', 'Migrating from Redux — worth it?', 'Anyone using the API for bulk import?', 'Dark mode contrast on charts', 'Weekly wins thread', 'Roadmap Q4 discussion', 'Tips for writing changelogs'][i],
+    title: ['Best practice for multi-tenant theming?', 'How do you handle stale HMR in Vite 8?', 'Show & tell: our onboarding flow', 'Feature request: saved table views', 'Do you centralise client state or keep it local?', 'Anyone using the API for bulk import?', 'Dark-mode contrast on chart labels', 'Weekly wins thread', 'Roadmap Q4 discussion', 'Tips for writing changelogs'][i],
     author: person(i),
     replies: (i * 7) % 40,
     views: 120 + i * 46,
