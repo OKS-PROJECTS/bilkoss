@@ -1,4 +1,4 @@
-import { rng, fmtDate, daysAgo, money } from '../lib/format'
+import { rng, fmtDate, daysAgo, money, avatarUrl, initials } from '../lib/format'
 
 const FIRST = ['James', 'Olivia', 'Liam', 'Ava', 'Noah', 'Mia', 'Ethan', 'Zoe', 'Lucas', 'Aria', 'Mason', 'Nora', 'Leo', 'Ivy', 'Owen', 'Ruby', 'Adam', 'Faye', 'Cole', 'Iris']
 const LAST = ['Reed', 'Hayes', 'Ward', 'Foster', 'Bennett', 'Shaw', 'Cole', 'Diaz', 'Nair', 'Frost', 'Lane', 'Marsh', 'Wells', 'Kerr', 'Pratt', 'Boone', 'Vance', 'Quinn', 'Rhodes', 'Sable']
@@ -10,7 +10,7 @@ export const company = (i) => COMPANIES[i % COMPANIES.length]
 
 export const rows = (n, fn) => Array.from({ length: n }, (_, i) => fn(i))
 
-export { fmtDate, daysAgo, money, rng }
+export { fmtDate, daysAgo, money, rng, avatarUrl, initials }
 
 /* ---- shared datasets ---- */
 

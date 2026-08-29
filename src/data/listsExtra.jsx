@@ -4,7 +4,6 @@ import * as D from './more'
 
 const bc = (group, leaf) => [{ label: 'Bilkoss', to: '/' }, { label: group }, { label: leaf }]
 const rows = (n, fn) => Array.from({ length: n }, (_, i) => fn(i))
-const nameCell = (r) => <EntityCell name={r.name} sub={r.sub} seed={r.name} />
 
 export const EXTRA_LIST_CONFIGS = {
   '/apps/ecommerce/sellers': {

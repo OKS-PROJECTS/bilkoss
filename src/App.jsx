@@ -8,9 +8,9 @@ import { detailRoutes, detailRoutePaths } from './data/detailRoutes'
 import { settingsRoutes, settingsRoutePaths } from './data/settingsRoutes'
 import { boardRoutes, boardRoutePaths } from './data/boardRoutes'
 import { reportRoutes, reportRoutePaths } from './data/reportRoutes'
-import { bespokeRoutes, bespokeRoutePaths } from './Pages/bespokeRoutes'
+import { bespokeRoutes, bespokeRoutePaths, SectionPage } from './Pages/bespokeRoutes'
 
-const ComingSoon = lazy(() => import('./Pages/InnerPages/ComingSoon'))
+const NotFound = lazy(() => import('./Pages/InnerPages/ComingSoon'))
 const ErrorPage = lazy(() => import('./Pages/Errors/ErrorPage'))
 const Maintenance = lazy(() => import('./Pages/Errors/Maintenance'))
 const AuthPages = {
@@ -79,9 +79,9 @@ export default function App() {
         {reportRoutes}
 
         {shellRoutes.map((p) => (
-          <Route key={p} path={p} element={<ComingSoon />} />
+          <Route key={p} path={p} element={<SectionPage />} />
         ))}
-        <Route path="*" element={<ComingSoon />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
