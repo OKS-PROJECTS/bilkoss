@@ -11,7 +11,7 @@ import {
   Timeline,
   TrendChip,
 } from '../../Components/ui'
-import { projectStatus, projectPerf, ongoingProjects, scheduleToday, taskList } from '../../data/dashboards'
+import { projectPerf, ongoingProjects, scheduleToday, taskList } from '../../data/dashboards'
 
 const bc = [{ label: 'Bilkoss', to: '/' }, { label: 'Dashboard' }, { label: 'Projects' }]
 
@@ -84,9 +84,15 @@ export default function ProjectsDashboard() {
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-3">
         <Panel title="Project Status Breakdown">
           <DonutCard
-            data={projectStatus}
+            data={[
+              { label: 'Completed', value: 965 },
+              { label: 'In Progress', value: 75 },
+              { label: 'Yet to Start', value: 102 },
+              { label: 'Cancelled', value: 96 },
+            ]}
             centerLabel="Projects"
             centerValue="1,238"
+            legend={false}
             roles={['primary', 'warning', 'info', 'danger']}
           />
           <ul className="mt-4 grid grid-cols-2 gap-3 text-[12.5px]">

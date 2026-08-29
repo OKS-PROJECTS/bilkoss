@@ -1,4 +1,4 @@
-import { Form, FormFieldSet, Button, Alert } from 'oks-ui'
+import { Form, FormFieldSet, Button, Alert, Chart } from 'oks-ui'
 import { TrendingUp, TrendingDown, PiggyBank, LineChart, EyeOff, Send, Download as DownloadIcon } from 'lucide-react'
 import { PageHeader, Panel, Surface, DataTable, EntityCell, StatusChip, TrendChip, Sparkline } from '../../Components/ui'
 import { money } from '../../lib/format'
@@ -97,7 +97,20 @@ export default function FinanceDashboard() {
               </div>
             ))}
           </div>
-          <FinanceChart />
+          <Chart
+            type="column"
+            data={financeOverview}
+            x="month"
+            series={[
+              { key: 'income', name: 'Total Income' },
+              { key: 'expense', name: 'Total Expenses' },
+            ]}
+            palette={{ colors: ['var(--app-primary)', 'var(--app-warn)'] }}
+            column={{ radius: 2 }}
+            height={300}
+            legend={{ position: 'bottom' }}
+            grid={{ horizontal: true, vertical: false }}
+          />
         </Panel>
 
         <Panel title="Quick Transfer">
@@ -118,44 +131,6 @@ export default function FinanceDashboard() {
         <DataTable columns={TXN_COLS} rows={transactions} pageSize={10} />
       </Panel>
     </>
-  )
-}
-
-function FinanceChart() {
-  // gold columns for expenses + a purple dashed line for the net trend
-  const data = financeOverview.map((m) => ({ ...m, net: m.income - m.expense }))
-  return (
-    <div className="relative">
-      <div className="flex h-[280px] items-end gap-2">
-        {data.map((m) => {
-          const maxV = 60
-          return (
-            <div key={m.month} className="flex flex-1 flex-col items-center gap-1">
-              <div className="flex w-full flex-1 items-end justify-center gap-0.5">
-                <span className="w-1/3 rounded-t" style={{ height: `${(m.income / maxV) * 100}%`, background: 'var(--app-surface-2)' }} />
-                <span className="w-1/3 rounded-t" style={{ height: `${(m.expense / maxV) * 100}%`, background: 'var(--app-warn)' }} />
-              </div>
-              <span className="text-[10px]" style={{ color: 'var(--app-fg-subtle)' }}>{m.month}</span>
-            </div>
-          )
-        })}
-      </div>
-      <svg className="pointer-events-none absolute inset-x-0 top-0 h-[262px] w-full" preserveAspectRatio="none" viewBox="0 0 100 100">
-        <polyline
-          points={data.map((m, i) => `${(i / (data.length - 1)) * 100},${100 - (m.net / 40) * 100}`).join(' ')}
-          fill="none"
-          stroke="var(--app-violet)"
-          strokeWidth="1"
-          strokeDasharray="2 2"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
-      <div className="mt-3 flex flex-wrap gap-4 text-[12px]" style={{ color: 'var(--app-fg-muted)' }}>
-        <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full" style={{ background: 'var(--app-surface-2)' }} /> Total Income</span>
-        <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full" style={{ background: 'var(--app-warn)' }} /> Total Expenses</span>
-        <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full" style={{ background: 'var(--app-violet)' }} /> Net</span>
-      </div>
-    </div>
   )
 }
 
