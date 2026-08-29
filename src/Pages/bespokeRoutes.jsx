@@ -8,6 +8,9 @@ const p = {
   '/dashboards/crm': lazy(() => import('./Dashboards/CrmDashboard')),
   '/dashboards/finance': lazy(() => import('./Dashboards/FinanceDashboard')),
   '/dashboards/projects': lazy(() => import('./Dashboards/ProjectsDashboard')),
+
+  '/components': lazy(() => import('./Components/ComponentGallery')),
+  '/components/kitchen-sink': lazy(() => import('./Components/KitchenSink')),
 }
 
 export const bespokeRoutePaths = Object.keys(p)
