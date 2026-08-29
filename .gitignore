@@ -1,0 +1,25 @@
+# logs
+logs
+*.log
+npm-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# internal / private docs — never ship
+.claude/
+docs/PLAYBOOK-NOTES.md
+docs/OKS-UI-FEEDBACK.md

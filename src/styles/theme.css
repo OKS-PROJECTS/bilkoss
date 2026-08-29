@@ -1,0 +1,275 @@
+/* ==========================================================================
+   Bilkoss — design-token layer
+   Ported reference values on top; a semantic --app-* layer underneath so
+   light/dark and any rebrand flip together. Composed ui/ components read
+   ONLY --app-* tokens.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --app-font: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --oks-font-family-base: var(--app-font);
+  --oks-font-family-sans: var(--app-font);
+
+  /* ---- brand ramp (around #236dc9) --------------------------------------- */
+  --oks-palette-brand-50: #eef4fb;
+  --oks-palette-brand-100: #d6e4f6;
+  --oks-palette-brand-200: #aecaed;
+  --oks-palette-brand-300: #7ea9e0;
+  --oks-palette-brand-400: #4b85d4;
+  --oks-palette-brand-500: #236dc9;
+  --oks-palette-brand-600: #1e5dab;
+  --oks-palette-brand-700: #1a4f90;
+  --oks-palette-brand-800: #163f73;
+  --oks-palette-brand-900: #13345d;
+  --oks-palette-brand-950: #0d2039;
+
+  /* repoint the primary ramp — both the palette alias and the semantic role */
+  --oks-palette-primary-50: var(--oks-palette-brand-50);
+  --oks-palette-primary-100: var(--oks-palette-brand-100);
+  --oks-palette-primary-200: var(--oks-palette-brand-200);
+  --oks-palette-primary-300: var(--oks-palette-brand-300);
+  --oks-palette-primary-400: var(--oks-palette-brand-400);
+  --oks-palette-primary-500: var(--oks-palette-brand-500);
+  --oks-palette-primary-600: var(--oks-palette-brand-600);
+  --oks-palette-primary-700: var(--oks-palette-brand-700);
+  --oks-palette-primary-800: var(--oks-palette-brand-800);
+  --oks-palette-primary-900: var(--oks-palette-brand-900);
+  --oks-palette-primary-950: var(--oks-palette-brand-950);
+  --oks-color-primary-50: var(--oks-palette-brand-50);
+  --oks-color-primary-100: var(--oks-palette-brand-100);
+  --oks-color-primary-200: var(--oks-palette-brand-200);
+  --oks-color-primary-300: var(--oks-palette-brand-300);
+  --oks-color-primary-400: var(--oks-palette-brand-400);
+  --oks-color-primary-500: var(--oks-palette-brand-500);
+  --oks-color-primary-600: var(--oks-palette-brand-600);
+  --oks-color-primary-700: var(--oks-palette-brand-700);
+  --oks-color-primary-800: var(--oks-palette-brand-800);
+  --oks-color-primary-900: var(--oks-palette-brand-900);
+  --oks-color-primary-950: var(--oks-palette-brand-950);
+
+  /* ---- semantic roles (reference hexes) -------------------------------- */
+  --oks-palette-success-50: #e4faf5;
+  --oks-palette-success-100: #c0f2e7;
+  --oks-palette-success-200: #86e6d0;
+  --oks-palette-success-300: #45d4b6;
+  --oks-palette-success-400: #17c6a4;
+  --oks-palette-success-500: #02bc9c;
+  --oks-palette-success-600: #029a80;
+  --oks-palette-success-700: #027865;
+  --oks-palette-success-800: #015e50;
+  --oks-palette-success-900: #014a40;
+  --oks-palette-success-950: #002c26;
+
+  --oks-palette-warning-50: #fef7ea;
+  --oks-palette-warning-100: #fdecc9;
+  --oks-palette-warning-200: #fbdc9b;
+  --oks-palette-warning-300: #facb74;
+  --oks-palette-warning-400: #f9bf59;
+  --oks-palette-warning-500: #f6ad2b;
+  --oks-palette-warning-600: #d98f15;
+  --oks-palette-warning-700: #a86d10;
+  --oks-palette-warning-800: #79500e;
+  --oks-palette-warning-900: #5f3f0c;
+  --oks-palette-warning-950: #382504;
+
+  --oks-palette-danger-50: #fdeef2;
+  --oks-palette-danger-100: #fbd7e0;
+  --oks-palette-danger-200: #f7afc2;
+  --oks-palette-danger-300: #f483a1;
+  --oks-palette-danger-400: #f7577e;
+  --oks-palette-danger-500: #ee3767;
+  --oks-palette-danger-600: #d21a4d;
+  --oks-palette-danger-700: #a5133c;
+  --oks-palette-danger-800: #79102e;
+  --oks-palette-danger-900: #5f0f26;
+  --oks-palette-danger-950: #370713;
+
+  --oks-palette-info-50: #ecf8fc;
+  --oks-palette-info-100: #d0eef7;
+  --oks-palette-info-200: #a3ddef;
+  --oks-palette-info-300: #78cde7;
+  --oks-palette-info-400: #5bc3e1;
+  --oks-palette-info-500: #33afd3;
+  --oks-palette-info-600: #218db0;
+  --oks-palette-info-700: #1b6f8b;
+  --oks-palette-info-800: #175a70;
+  --oks-palette-info-900: #164a5d;
+  --oks-palette-info-950: #0a2d3a;
+
+  --oks-palette-secondary-50: #f0eefe;
+  --oks-palette-secondary-100: #e0defd;
+  --oks-palette-secondary-200: #c6c0fb;
+  --oks-palette-secondary-300: #a89ff7;
+  --oks-palette-secondary-400: #8f83f3;
+  --oks-palette-secondary-500: #7b70ef;
+  --oks-palette-secondary-600: #5f52d9;
+  --oks-palette-secondary-700: #4c40b4;
+  --oks-palette-secondary-800: #3d3490;
+  --oks-palette-secondary-900: #322c72;
+  --oks-palette-secondary-950: #1e1a45;
+
+  /* ---- radius --------------------------------------------------------- */
+  --oks-radius-sm: 0.25rem;
+  --oks-radius-md: 0.3rem;
+  --oks-radius-lg: 0.4rem;
+  --oks-radius-xl: 0.5rem;
+  --oks-radius-2xl: 1rem;
+
+  /* ---- the app layer (light) ---------------------------------------- */
+  --app-bg: #f6f7fb;
+  --app-surface: #ffffff;
+  --app-surface-2: #f6f7fb;
+  --app-border: #e7e9eb;
+  --app-border-strong: #d6dade;
+
+  --app-fg-strong: #323a46;
+  --app-fg: #4c4c5c;
+  --app-fg-muted: #7c828e;
+  --app-fg-subtle: #9ba6b7;
+
+  --app-card-radius: 0.3rem;
+  --app-card-border: 0 solid var(--app-border);
+  --app-card-shadow: 0px 1px 4px 0px rgba(130, 143, 163, 0.15);
+
+  --app-menu-bg: #1e1f27;
+  --app-menu-fg: #7a8ea7;
+  --app-menu-fg-muted: #6b7d94;
+  --app-menu-active-bg: #22232c;
+  --app-menu-active-fg: #ced6df;
+  --app-menu-hover-bg: #2f3742;
+  --app-menu-hover-fg: #bccee4;
+  --app-menu-border: #1e1f27;
+  --app-menu-heading: #7a8ea7;
+
+  --app-header-bg: #ffffff;
+  --app-header-height: 65px;
+  --app-header-shadow: 0px 1px 4px 0px rgba(130, 143, 163, 0.15);
+
+  /* role primitives + soft tints */
+  --app-accent: var(--oks-palette-brand-500);
+  --app-accent-soft: rgba(35, 109, 201, 0.12);
+  --app-ok: #02bc9c;
+  --app-ok-soft: rgba(2, 188, 156, 0.14);
+  --app-warn: #f6ad2b;
+  --app-warn-soft: rgba(246, 173, 43, 0.16);
+  --app-bad: #f7577e;
+  --app-bad-soft: rgba(247, 87, 126, 0.14);
+  --app-violet: #7b70ef;
+  --app-violet-soft: rgba(123, 112, 239, 0.14);
+  --app-sky: #5bc3e1;
+  --app-sky-soft: rgba(91, 195, 225, 0.16);
+
+  /* semantic aliases — reference other --app-* tokens so they cascade to dark */
+  --app-primary: var(--app-accent);
+  --app-primary-soft: var(--app-accent-soft);
+  --app-success: var(--app-ok);
+  --app-success-soft: var(--app-ok-soft);
+  --app-warning: var(--app-warn);
+  --app-warning-soft: var(--app-warn-soft);
+  --app-danger: var(--app-bad);
+  --app-danger-soft: var(--app-bad-soft);
+  --app-info: var(--app-sky);
+  --app-info-soft: var(--app-sky-soft);
+
+  /* oks-ui leaves these light-only — set them for both themes */
+  --oks-color-surface: var(--app-surface);
+  --oks-form-field-bg: var(--app-surface);
+  --oks-form-field-fg: var(--app-fg-strong);
+  --oks-form-field-border: var(--app-border-strong);
+  --oks-form-field-border-hover: var(--app-fg-subtle);
+  --oks-form-field-placeholder: var(--app-fg-subtle);
+  --oks-form-field-label: var(--app-fg);
+  --oks-form-field-muted: var(--app-fg-muted);
+}
+
+:root[data-theme='dark'] {
+  --app-bg: #17181e;
+  --app-surface: #1e1f27;
+  --app-surface-2: #252630;
+  --app-border: #2b2f38;
+  --app-border-strong: #3a3f4b;
+
+  --app-fg-strong: #e5eaf0;
+  --app-fg: #aab8c5;
+  --app-fg-muted: #8391a2;
+  --app-fg-subtle: #6b7686;
+
+  --app-card-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.28);
+
+  --app-menu-bg: #1e1f27;
+  --app-menu-fg: #8495ab;
+  --app-menu-fg-muted: #6f7f95;
+  --app-menu-active-bg: #262a34;
+  --app-menu-active-fg: #dfe6ee;
+  --app-menu-hover-bg: #2b303b;
+  --app-menu-hover-fg: #c5d3e4;
+  --app-menu-border: #262730;
+  --app-menu-heading: #6f7f95;
+
+  --app-header-bg: #1e1f27;
+  --app-header-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.03);
+
+  --app-accent-soft: rgba(75, 133, 212, 0.2);
+  --app-ok-soft: rgba(2, 188, 156, 0.18);
+  --app-warn-soft: rgba(246, 173, 43, 0.2);
+  --app-bad-soft: rgba(247, 87, 126, 0.2);
+  --app-violet-soft: rgba(123, 112, 239, 0.22);
+  --app-sky-soft: rgba(91, 195, 225, 0.2);
+
+  --oks-color-surface: var(--app-surface);
+  --oks-form-field-bg: var(--app-surface-2);
+  --oks-form-field-fg: var(--app-fg-strong);
+  --oks-form-field-border: var(--app-border-strong);
+  --oks-form-field-border-hover: var(--app-fg-subtle);
+  --oks-form-field-placeholder: var(--app-fg-subtle);
+  --oks-form-field-label: var(--app-fg);
+  --oks-form-field-muted: var(--app-fg-muted);
+}
+
+body {
+  background: var(--app-bg);
+  color: var(--app-fg);
+}
+
+/* ==========================================================================
+   Global oks-ui patches — each is also an OKS-UI-FEEDBACK.md entry
+   ========================================================================== */
+
+/* <Chart> renders its own bordered/padded <figure> — every chart already
+   sits inside a Surface */
+.oksChart {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* <Chart type="donut"> paints a centre total with no opt-out */
+.donut-no-center svg > g > text[text-anchor='middle'][dominant-baseline='middle'] {
+  display: none;
+}
+
+/* Button bordered/ghost + default colour uses a mid-grey that fails contrast
+   on dark backgrounds */
+.oksButton[data-variant='bordered'][data-color='default'],
+.oksButton[data-variant='ghost'][data-color='default'] {
+  --oks-button-tone: var(--app-fg-muted);
+  color: var(--app-fg) !important;
+}
+.oksButton[data-variant='bordered'][data-color='default'] {
+  border-color: var(--app-border-strong) !important;
+}
+
+/* Tabs solid track colour is hard-coded near-white */
+.seg-control .oksTabs[data-variant='solid'] [role='tablist'],
+.seg-control [role='tablist'] {
+  background: var(--app-surface-2) !important;
+}
+
+/* keep native scrollbars unobtrusive */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--app-border-strong) transparent;
+}

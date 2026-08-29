@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+
+/* Tailwind's dark: variant follows [data-theme="dark"] on <html> */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--app-font, 'Nunito', system-ui, sans-serif);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+::before,
+::after {
+  border-color: var(--app-border);
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <style>
+    .mark { fill: #100c1d; }
+    @media (prefers-color-scheme: dark) {
+      .mark { fill: #f0e9e8; }
+    }
+  </style>
+  <path class="mark" d="M18 12a14 14 0 1 0 0 28 14 14 0 0 0 0-28zm0 7a7 7 0 1 1 0 14 7 7 0 0 1 0-14z"/>
+  <circle cx="35.5" cy="37" r="4.5" fill="#ED0D11"/>
+  <path class="mark" d="M44 13h6v11.5L58.4 13H66l-9.8 12.8L66 40h-7.6l-6.1-9.1L50 33.6V40h-6z" transform="translate(-2 0)"/>
+</svg>
