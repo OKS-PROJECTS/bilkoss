@@ -1,16 +1,62 @@
-# React + Vite
+# Bilkoss
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**An admin dashboard template built entirely with [oks-ui](https://www.npmjs.com/package/oks-ui).**
 
-Currently, two official plugins are available:
+Every button, input, chart, menu and table cell is an oks-ui primitive or composed
+from oks-ui primitives — no second component library, no second charting library,
+no form or data-fetching library anywhere in the source.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Live demo:** https://oks-projects.github.io/bilkoss/ · **Repository:** https://github.com/OKS-PROJECTS/bilkoss
 
-## React Compiler
+![Bilkoss dashboard](.github/media/dashboard.png)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Screenshots
 
-## Expanding the Oxlint configuration
+| Dashboard | Component gallery | List view |
+| --- | --- | --- |
+| ![](.github/media/dashboard.png) | ![](.github/media/components.png) | ![](.github/media/list.png) |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Stack
+
+- **Vite + React 19**, JavaScript
+- **oks-ui** for all UI — primitives, fields, charts
+- **Tailwind v4** for layout only (flex / grid / spacing); every colour, radius,
+  border and shadow is a CSS variable
+- **react-router-dom v7**
+- **lucide-react** for icons
+- `oxlint` for linting
+
+## Scripts
+
+```bash
+npm install
+npm run dev       # start the dev server
+npm run lint      # oxlint — must be clean
+npm run build     # production build
+npm run preview   # preview the build
+```
+
+## How the `ui/` layer works
+
+oks-ui is a primitives + fields + charts library with no application scaffolding,
+so `src/Components/ui/` composes the missing pieces (Card/Surface, DataTable,
+Pagination, KpiCard, DonutCard, Timeline, Accordion, SegmentedControl, BoardView,
+EmptyState, Skeleton, …) **from oks-ui parts + `--app-*` design tokens**. Pages
+never hand-roll these — they import from the barrel in `src/Components/ui/index.js`.
+
+Screens that are a list, form, detail, settings panel, board or report are
+**config objects** (`src/data/*.jsx`) rendered through a shared archetype page,
+not bespoke components.
+
+`src/styles/theme.css` is the single file that makes the whole app look the way it
+does — a brand ramp, semantic role colours, and an `--app-*` semantic layer that
+light/dark and any rebrand flip together.
+
+## Versioning
+
+The template has its own SemVer, independent of oks-ui's. See
+[`CHANGELOG.md`](./CHANGELOG.md) for the compatible oks-ui range.
+
+## License
+
+[MIT](./LICENSE) © OKS-PROJECTS

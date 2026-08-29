@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
-import { Chart, Avatar, AvatarGroup, Button, Chip, Checkbox, TextField } from 'oks-ui'
+import { Avatar, AvatarGroup, Button, Chip, Checkbox, TextField } from 'oks-ui'
 import * as Icons from 'lucide-react'
 import {
   PageHeader, Panel, Surface, KpiCard, StatGroup, DataTable, ChartCard, DonutCard,
@@ -124,9 +124,9 @@ export function ChartsDistributions() {
     <>
       <PageHeader title="Distributions" breadcrumbs={crumb('Charts', 'Distributions')} />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <Panel title="Pie"><Chart type="pie" data={donut} x="label" series={{ key: 'value', name: 'Share' }} height={240} palette={{ roles: ['primary', 'info', 'secondary', 'warning'] }} legend={{ position: 'bottom' }} /></Panel>
+        <Panel title="Pie chart"><DonutCard data={donut} centerLabel="Users" centerValue="48k" roles={['primary','info','secondary','warning']} /></Panel>
         <Panel title="Donut"><DonutCard data={donut} centerLabel="Users" centerValue="48k" /></Panel>
-        <Panel title="Half donut"><Chart type="donut" data={donut} x="label" series={{ key: 'value', name: 'Share' }} height={240} palette={{ roles: ['primary', 'info', 'secondary', 'warning'] }} pie={{ arc: 'semi' }} legend={false} /></Panel>
+        <Panel title="Breakdown"><DonutCard data={donut} centerLabel="Total" roles={['primary','info','secondary','warning']} legend={false} /></Panel>
       </div>
     </>
   )
@@ -143,7 +143,7 @@ export function ChartsProgress() {
           { label: 'Support backlog', value: 24, sub: '24 open', color: 'warning' },
         ]} /></Panel>
         <Panel title="Completion gauge">
-          <Chart type="donut" data={[{ label: 'Done', value: 68 }, { label: 'Remaining', value: 32 }]} x="label" series={{ key: 'value', name: 'Progress' }} height={240} palette={{ colors: ['var(--app-primary)', 'var(--app-surface-2)'] }} pie={{ arc: 'semi' }} legend={false} />
+          <DonutCard data={[{ label: 'Done', value: 68 }, { label: 'Remaining', value: 32 }]} centerLabel="Complete" centerValue="68%" colors={['var(--app-primary)', 'var(--app-surface-2)']} legend={false} />
         </Panel>
       </div>
     </>
