@@ -7,13 +7,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap');
 
-/* The dark selector is included here because oks-ui's tokens.css re-declares its
-   palette ramps under `:root[data-theme="dark"]` — a higher specificity than a
-   plain `:root` — so the brand ramp overrides below must match that specificity
-   to win in dark mode too. The template's brand hues are identical light/dark;
-   the dark `--app-*` surface/text values are re-set in the block that follows. */
-:root,
-:root[data-theme='dark'] {
+/* Brand ramp + role overrides. oks-ui 1.1.2 wraps its own token declarations in
+   `:where()` (zero specificity), so a plain `:root` override wins in both
+   themes. The template's brand hues are identical light/dark; the dark
+   `--app-*` surface/text values are re-set in the block that follows. */
+:root {
   --app-font: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --app-font-display: 'Figtree', 'Nunito', system-ui, sans-serif;
   --oks-font-family-base: var(--app-font);
@@ -245,8 +243,9 @@ body {
 }
 
 /* ==========================================================================
-   oks-ui component bridges & patches
-   (B6 is an open OKS-UI-FEEDBACK.md entry; the rest are design bridges)
+   oks-ui design bridges — no bug patches left (the B6 button-contrast override
+   was retired in oks-ui 1.1.2, which lifts the low-emphasis default tone to
+   --oks-color-default-700 in both themes)
    ========================================================================== */
 
 /* Card carries the reference card shadow — oks-ui Card reads --oks-color-surface
@@ -262,17 +261,6 @@ body {
   background: transparent !important;
   padding: 0 !important;
   box-shadow: none !important;
-}
-
-/* Button bordered/ghost + default colour uses a mid-grey that fails contrast
-   on dark backgrounds */
-.oksButton[data-variant='bordered'][data-color='default'],
-.oksButton[data-variant='ghost'][data-color='default'] {
-  --oks-button-tone: var(--app-fg-muted);
-  color: var(--app-fg) !important;
-}
-.oksButton[data-variant='bordered'][data-color='default'] {
-  border-color: var(--app-border-strong) !important;
 }
 
 /* header search: full rounded pill on a subtle fill */

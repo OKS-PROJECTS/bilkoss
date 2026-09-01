@@ -1,7 +1,7 @@
 {
   "name": "bilkoss",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,7 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "lucide-react": "^1.37.0",
-    "oks-ui": "^1.1.1",
+    "oks-ui": "^1.1.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.3"

@@ -4,9 +4,33 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-> Requires oks-ui ^1.1.1
+> Requires oks-ui ^1.1.2
 
 ## [Unreleased]
+
+## [1.1.1] — 2026-09-01
+
+### Changed
+
+- Bumped oks-ui `^1.1.1` → `^1.1.2`.
+
+### Removed
+
+- The last CSS override — the `Button variant="bordered"/"ghost"` default-tone
+  contrast patch. oks-ui 1.1.2 lifts the low-emphasis default tone to
+  `--oks-color-default-700` in both themes, so `src/styles/theme.css` now carries
+  only design bridges (`.oksCard` shadow, `.oksChart` frame reset, the header
+  search pill), no bug patches.
+
+### Fixed
+
+- The dark-mode brand-ramp override in `theme.css` is back to a plain `:root`
+  selector — oks-ui 1.1.2 wraps its own token blocks in `:where()` (zero
+  specificity), so consumer overrides win in both themes without the widened
+  selector.
+- Upstream in oks-ui 1.1.2 (no template change): `SwitchField` no longer emits a
+  React controlled/uncontrolled `console.error`; clicking a `Table` sort header
+  on a wide horizontally-scrolling table no longer scroll-jumps the container.
 
 ## [1.1.0] — 2026-09-01
 
