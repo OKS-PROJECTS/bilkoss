@@ -1,28 +1,18 @@
-import { Tabs, Tab } from 'oks-ui'
+import { SegmentedControl as OksSegmentedControl } from 'oks-ui'
 
 /**
- * Thin wrapper over <Tabs variant="solid">, re-skinned for dark (see the
- * `.seg-control` patch in theme.css). Used for "Revenue / Orders / Sessions"
- * style segmented switches.
- *
- * options: [{ key, label }]
+ * Wrapper over oks-ui <SegmentedControl>. Accepts the template's
+ * `options: [{ key, label }]` shape (also tolerates `{ value, label }`).
  */
-export default function SegmentedControl({ options, value, onChange, size = 'sm', fullWidth = false }) {
+export default function SegmentedControl({ options, value, onChange, size = 'sm', fullWidth = false, 'aria-label': ariaLabel = 'View' }) {
   return (
-    <div className="seg-control inline-block">
-      <Tabs
-        variant="solid"
-        color="primary"
-        size={size}
-        radius="md"
-        fullWidth={fullWidth}
-        selectedKey={value}
-        onSelectionChange={(k) => onChange(String(k))}
-      >
-        {options.map((o) => (
-          <Tab key={o.key} title={o.label} />
-        ))}
-      </Tabs>
-    </div>
+    <OksSegmentedControl
+      aria-label={ariaLabel}
+      size={size}
+      fullWidth={fullWidth}
+      value={value}
+      onChange={onChange}
+      options={options.map((o) => ({ value: o.value ?? o.key, label: o.label, icon: o.icon, isDisabled: o.isDisabled }))}
+    />
   )
 }

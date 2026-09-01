@@ -1,4 +1,8 @@
-/** Tiny inline SVG sparkline — reliable at small sizes. */
+/**
+ * Tiny inline SVG sparkline. oks-ui has no sparkline primitive — its `<Chart>`
+ * needs a measured stage and does not render reliably at 30–40px, so this stays
+ * a deterministic hand-drawn path. `data` is a plain number array.
+ */
 export default function Sparkline({ data, width = 96, height = 34, color = 'primary', area = true, className }) {
   const min = Math.min(...data)
   const max = Math.max(...data)

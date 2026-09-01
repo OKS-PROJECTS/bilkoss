@@ -1,20 +1,13 @@
-import clsx from 'clsx'
+import { Skeleton as OksSkeleton } from 'oks-ui'
 
-export default function Skeleton({ className, rounded = 'rounded' }) {
-  return (
-    <div
-      className={clsx('animate-pulse', rounded, className)}
-      style={{ background: 'var(--app-surface-2)' }}
-    />
-  )
+/**
+ * Thin pass-through to oks-ui <Skeleton>. Kept as a local wrapper so call sites
+ * (`<Skeleton className="h-3.5" />`) and the `SkeletonText` helper stay stable.
+ */
+export default function Skeleton({ className, rounded, ...rest }) {
+  return <OksSkeleton className={className} radius={rounded === 'rounded-full' ? 'full' : undefined} {...rest} />
 }
 
 export function SkeletonText({ lines = 3, className }) {
-  return (
-    <div className={clsx('space-y-2', className)}>
-      {Array.from({ length: lines }).map((_, i) => (
-        <Skeleton key={i} className="h-3" style={{ width: i === lines - 1 ? '60%' : '100%' }} />
-      ))}
-    </div>
-  )
+  return <OksSkeleton variant="text" lines={lines} className={className} />
 }

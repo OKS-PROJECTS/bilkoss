@@ -7,7 +7,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap');
 
-:root {
+/* The dark selector is included here because oks-ui's tokens.css re-declares its
+   palette ramps under `:root[data-theme="dark"]` — a higher specificity than a
+   plain `:root` — so the brand ramp overrides below must match that specificity
+   to win in dark mode too. The template's brand hues are identical light/dark;
+   the dark `--app-*` surface/text values are re-set in the block that follows. */
+:root,
+:root[data-theme='dark'] {
   --app-font: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --app-font-display: 'Figtree', 'Nunito', system-ui, sans-serif;
   --oks-font-family-base: var(--app-font);
@@ -174,8 +180,11 @@
   --app-info: var(--app-sky);
   --app-info-soft: var(--app-sky-soft);
 
-  /* oks-ui leaves these light-only — set them for both themes */
+  /* re-point oks-ui's themed surface/border/field tokens at the --app-* layer so
+     a rebrand flows through Card / Table / Accordion / inputs in one place
+     (oks-ui ships its own light + dark values for these since 1.1.0) */
   --oks-color-surface: var(--app-surface);
+  --oks-color-border: var(--app-border);
   --oks-form-field-bg: var(--app-surface);
   --oks-form-field-fg: var(--app-fg-strong);
   --oks-form-field-border: var(--app-border-strong);
@@ -220,6 +229,7 @@
   --app-sky-soft: rgba(91, 195, 225, 0.2);
 
   --oks-color-surface: var(--app-surface);
+  --oks-color-border: var(--app-border);
   --oks-form-field-bg: var(--app-surface-2);
   --oks-form-field-fg: var(--app-fg-strong);
   --oks-form-field-border: var(--app-border-strong);
@@ -235,8 +245,15 @@ body {
 }
 
 /* ==========================================================================
-   Global oks-ui patches — each is also an OKS-UI-FEEDBACK.md entry
+   oks-ui component bridges & patches
+   (B6 is an open OKS-UI-FEEDBACK.md entry; the rest are design bridges)
    ========================================================================== */
+
+/* Card carries the reference card shadow — oks-ui Card reads --oks-color-surface
+   + --oks-color-border (re-pointed above), but shadow has no token */
+.oksCard {
+  box-shadow: var(--app-card-shadow);
+}
 
 /* <Chart> renders its own bordered/padded <figure> — every chart already
    sits inside a Surface */
@@ -245,11 +262,6 @@ body {
   background: transparent !important;
   padding: 0 !important;
   box-shadow: none !important;
-}
-
-/* <Chart type="donut"> paints a centre total with no opt-out */
-.donut-no-center svg > g > text[text-anchor='middle'][dominant-baseline='middle'] {
-  display: none;
 }
 
 /* Button bordered/ghost + default colour uses a mid-grey that fails contrast
@@ -261,12 +273,6 @@ body {
 }
 .oksButton[data-variant='bordered'][data-color='default'] {
   border-color: var(--app-border-strong) !important;
-}
-
-/* Tabs solid track colour is hard-coded near-white */
-.seg-control .oksTabs[data-variant='solid'] [role='tablist'],
-.seg-control [role='tablist'] {
-  background: var(--app-surface-2) !important;
 }
 
 /* header search: full rounded pill on a subtle fill */

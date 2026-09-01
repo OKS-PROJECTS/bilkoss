@@ -41,7 +41,7 @@ export default function ChartCard({
         legend={legend ?? { position: 'bottom' }}
         grid={grid ?? { horizontal: !isLine || true, vertical: false }}
         axisX={axisX}
-        axisY={isLine ? { show: false, ...axisY } : axisY}
+        axisY={isLine ? { hide: true, ...axisY } : axisY}
         line={isLine ? { curve: 'smooth', markers: { size: 0 }, area: { show: type === 'area', fill: { opacity: 0.14 } }, ...line } : line}
         column={column}
         bar={bar}

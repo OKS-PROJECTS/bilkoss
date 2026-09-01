@@ -1,24 +1,34 @@
+import { isValidElement } from 'react'
+import { EmptyState as OksEmptyState } from 'oks-ui'
 import { Inbox } from 'lucide-react'
 
-export default function EmptyState({ icon, title = 'Nothing here yet', description, action, className }) {
-  const Icon = icon || Inbox
+/**
+ * Pass-through to oks-ui <EmptyState>. Keeps the template's defaults (an Inbox
+ * icon, a default title) and the older `action` prop name as an alias. `icon`
+ * accepts a Lucide component *or* a ready node.
+ */
+export default function EmptyState({
+  icon,
+  title = 'Nothing here yet',
+  description,
+  action,
+  actions,
+  className,
+  ...rest
+}) {
+  const src = icon || Inbox
+  const iconNode = isValidElement(src) ? src : (() => {
+    const Icon = src
+    return <Icon size={22} />
+  })()
   return (
-    <div className={`flex flex-col items-center justify-center px-6 py-12 text-center ${className || ''}`}>
-      <span
-        className="mb-3 flex h-12 w-12 items-center justify-center rounded-full"
-        style={{ background: 'var(--app-surface-2)', color: 'var(--app-fg-subtle)' }}
-      >
-        <Icon size={22} />
-      </span>
-      <p className="text-[14px] font-semibold" style={{ color: 'var(--app-fg-strong)' }}>
-        {title}
-      </p>
-      {description && (
-        <p className="mt-1 max-w-sm text-[13px]" style={{ color: 'var(--app-fg-muted)' }}>
-          {description}
-        </p>
-      )}
-      {action && <div className="mt-4">{action}</div>}
-    </div>
+    <OksEmptyState
+      title={title}
+      description={description}
+      icon={iconNode}
+      actions={actions ?? action}
+      className={className}
+      {...rest}
+    />
   )
 }

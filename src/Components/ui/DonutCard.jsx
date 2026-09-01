@@ -1,13 +1,13 @@
 import clsx from 'clsx'
+import { Chart } from 'oks-ui'
 
 /**
  * Donut + custom centre value + optional side legend.
  *
- * NOTE: oks-ui `<Chart type="donut">` renders at a broken internal size in this
- * environment (its stage ResizeObserver never reports a width, so it falls back
- * to a 720px viewBox and the arc is drawn tiny). Composed here from an SVG ring
- * instead — segments coloured from the same `--app-*` / role tokens. Logged in
- * OKS-UI-FEEDBACK.md.
+ * The ring is oks-ui `<Chart type="donut">` (the stage-width bug that forced a
+ * hand-drawn SVG ring in v1.0.x is fixed in 1.1). The centre label uses the
+ * `pie.renderCenter` slot; the side legend with percentages is kept bespoke so
+ * it matches the reference dashboards.
  */
 export default function DonutCard({
   data, // [{ label, value }]
@@ -21,17 +21,8 @@ export default function DonutCard({
 }) {
   const total = data.reduce((s, d) => s + d.value, 0) || 1
   const size = legend ? Math.min(height, 200) : height
-  const stroke = size * 0.185
-  const r = (size - stroke) / 2
-  const c = 2 * Math.PI * r
   const colOf = (i) => (colors ? colors[i % colors.length] : `var(--oks-color-${roles[i % roles.length]}-500)`)
-
-  const segs = data.reduce((acc, d, i) => {
-    const prev = acc.length ? acc[acc.length - 1].cum : 0
-    const frac = d.value / total
-    acc.push({ dash: frac * c, gap: c - frac * c, off: -prev * c, col: colOf(i), cum: prev + frac })
-    return acc
-  }, [])
+  const palette = colors ? { colors } : { roles }
 
   return (
     <div
@@ -41,32 +32,30 @@ export default function DonutCard({
         className,
       )}
     >
-      <div className="relative shrink-0" style={{ width: size, height: size }}>
-        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
-          <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--app-surface-2)" strokeWidth={stroke} />
-          {segs.map((s, i) => (
-            <circle
-              key={i}
-              cx={size / 2}
-              cy={size / 2}
-              r={r}
-              fill="none"
-              stroke={s.col}
-              strokeWidth={stroke}
-              strokeDasharray={`${s.dash} ${s.gap}`}
-              strokeDashoffset={s.off}
-              strokeLinecap="butt"
-            />
-          ))}
-        </svg>
-        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-[11px] font-medium tracking-wide uppercase" style={{ color: 'var(--app-fg-muted)' }}>
-            {centerLabel}
-          </span>
-          <span className="font-display text-[22px] font-bold" style={{ color: 'var(--app-fg-strong)' }}>
-            {centerValue ?? total.toLocaleString()}
-          </span>
-        </div>
+      <div className="shrink-0" style={{ width: size, height: size }}>
+        <Chart
+          type="donut"
+          height={size}
+          data={data}
+          x="label"
+          series={[{ key: 'value', name: centerLabel }]}
+          palette={palette}
+          legend={false}
+          unstyled
+          pie={{
+            donutInnerRadiusRatio: 0.66,
+            renderCenter: () => (
+              <div className="flex flex-col items-center justify-center leading-tight">
+                <span className="text-[11px] font-medium tracking-wide uppercase" style={{ color: 'var(--app-fg-muted)' }}>
+                  {centerLabel}
+                </span>
+                <span className="font-display text-[22px] font-bold" style={{ color: 'var(--app-fg-strong)' }}>
+                  {centerValue ?? total.toLocaleString()}
+                </span>
+              </div>
+            ),
+          }}
+        />
       </div>
 
       {legend && (

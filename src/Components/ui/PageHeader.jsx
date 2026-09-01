@@ -1,28 +1,24 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight } from 'lucide-react'
 import clsx from 'clsx'
+import { Breadcrumbs as OksBreadcrumbs, BreadcrumbItem } from 'oks-ui'
 
+/** Navigation trail — oks-ui <Breadcrumbs>. items: [{ label, to? }] */
 export function Breadcrumbs({ items = [] }) {
   return (
-    <nav aria-label="Breadcrumb">
-      <ol className="flex items-center gap-1.5 text-[13px]" style={{ color: 'var(--app-fg-muted)' }}>
-        {items.map((it, i) => {
-          const last = i === items.length - 1
-          return (
-            <li key={i} className="flex items-center gap-1.5">
-              {it.to && !last ? (
-                <Link to={it.to} className="transition-colors hover:text-[var(--app-primary)]">
-                  {it.label}
-                </Link>
-              ) : (
-                <span style={last ? { color: 'var(--app-fg)' } : undefined}>{it.label}</span>
-              )}
-              {!last && <ChevronRight size={13} className="opacity-50" />}
-            </li>
-          )
-        })}
-      </ol>
-    </nav>
+    <OksBreadcrumbs aria-label="Breadcrumb" classNames={{ base: 'text-[13px]' }}>
+      {items.map((it, i) => {
+        const last = i === items.length - 1
+        return it.to && !last ? (
+          <BreadcrumbItem key={i} as={Link} to={it.to}>
+            {it.label}
+          </BreadcrumbItem>
+        ) : (
+          <BreadcrumbItem key={i} isCurrent={last}>
+            {it.label}
+          </BreadcrumbItem>
+        )
+      })}
+    </OksBreadcrumbs>
   )
 }
 

@@ -1,50 +1,38 @@
-import clsx from 'clsx'
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import { Stat as OksStat, StatGroup as OksStatGroup } from 'oks-ui'
 import { Surface } from './Surface'
-import { TrendChip } from './chips'
 
-/** Small inline stat — label over value, optional trend. */
-export function Stat({ label, value, trend, trendSuffix, hint, className }) {
+/**
+ * Small inline stat — pass-through to oks-ui <Stat>. `trend` here is a signed
+ * number (the reference's "+6.2%" style); map it to oks-ui's `delta` + `trend`.
+ */
+export function Stat({ label, value, trend, trendSuffix = '%', hint, className }) {
+  const dir = trend == null ? undefined : trend > 0 ? 'up' : trend < 0 ? 'down' : 'flat'
   return (
-    <div className={clsx('min-w-0', className)}>
-      <div className="text-[13px] font-semibold uppercase tracking-wide" style={{ color: 'var(--app-fg-subtle)' }}>
-        {label}
-      </div>
-      <div className="mt-1 flex items-baseline gap-2">
-        <span className="text-[22px] font-bold" style={{ color: 'var(--app-fg-strong)' }}>
-          {value}
-        </span>
-        {trend != null && <TrendChip value={trend} suffix={trendSuffix} />}
-      </div>
-      {hint && (
-        <div className="mt-1 text-[12px]" style={{ color: 'var(--app-fg-subtle)' }}>
-          {hint}
-        </div>
-      )}
-    </div>
+    <OksStat
+      className={className}
+      label={label}
+      value={value}
+      help={hint}
+      trend={dir}
+      delta={trend == null ? undefined : `${Math.abs(trend)}${trendSuffix}`}
+    />
   )
 }
 
-export function StatGroup({ cols = 4, children, className }) {
+/** Responsive KPI grid — oks-ui <StatGroup>. `cols` kept as an alias for `columns`. */
+export function StatGroup({ cols = 4, columns, children, className }) {
   return (
-    <div
-      className={clsx(
-        'grid grid-cols-2 gap-6',
-        cols === 3 && 'lg:grid-cols-3',
-        cols === 4 && 'lg:grid-cols-4',
-        cols === 5 && 'lg:grid-cols-5',
-        className,
-      )}
-    >
+    <OksStatGroup columns={columns ?? cols} className={className}>
       {children}
-    </div>
+    </OksStatGroup>
   )
 }
 
 /**
- * KPI card — matches the reference's stat cards: uppercase muted label, a
- * restrained value, a "delta · since last month" line, and a soft icon disc.
- * 2-up on phones, 2/3/4-up from lg.
+ * KPI card — the reference's dashboard stat card: uppercase muted label, a large
+ * value, a "delta · since last month" line, and a soft icon disc. Kept as a
+ * bespoke composition over <Surface> for reference fidelity.
  */
 export function KpiCard({ label, value, trend, trendSuffix = '%', invertTrend = false, hint = 'Since last month', icon, accent = 'primary' }) {
   const up = (trend ?? 0) >= 0

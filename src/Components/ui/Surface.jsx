@@ -1,23 +1,18 @@
 import clsx from 'clsx'
+import { Card } from 'oks-ui'
 
 /**
- * Card / surface primitive — oks-ui ships none.
- * Built from a div + --app-* tokens.
+ * Card / surface primitive — now backed by oks-ui <Card> (reads
+ * `--oks-color-surface` + `--oks-color-border`, both re-pointed to `--app-*` in
+ * theme.css; the `.oksCard` rule there carries the reference card shadow).
+ * Padding stays an explicit inner `p-5` so every existing call site keeps its
+ * spacing.
  */
-export function Surface({ as: As = 'div', className, bodyClassName, padded = true, children, ...rest }) {
+export function Surface({ as, className, bodyClassName, padded = true, children, ...rest }) {
   return (
-    <As
-      className={clsx('oks-surface flex flex-col', className)}
-      style={{
-        background: 'var(--app-surface)',
-        border: 'var(--app-card-border)',
-        borderRadius: 'var(--app-card-radius)',
-        boxShadow: 'var(--app-card-shadow)',
-      }}
-      {...rest}
-    >
+    <Card as={as} radius="md" className={clsx('oks-surface flex flex-col', className)} {...rest}>
       {padded ? <div className={clsx('p-5', bodyClassName)}>{children}</div> : children}
-    </As>
+    </Card>
   )
 }
 

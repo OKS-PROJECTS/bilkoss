@@ -38,11 +38,13 @@ npm run preview   # preview the build
 
 ## How the `ui/` layer works
 
-oks-ui is a primitives + fields + charts library with no application scaffolding,
-so `src/Components/ui/` composes the missing pieces (Card/Surface, DataTable,
-Pagination, KpiCard, DonutCard, Timeline, Accordion, SegmentedControl, BoardView,
-EmptyState, Skeleton, …) **from oks-ui parts + `--app-*` design tokens**. Pages
-never hand-roll these — they import from the barrel in `src/Components/ui/index.js`.
+`src/Components/ui/` is a thin adapter over oks-ui. Most wrappers (`Surface`,
+`DataTable`, `Pagination`, `StatGroup`, `Accordion`, `Timeline`, `BoardView`,
+`SegmentedControl`, `MeterList`, `Skeleton`, `EmptyState`, `Breadcrumbs`, …) just
+delegate to the matching oks-ui component and keep a stable, template-facing prop
+shape; a few (`KpiCard`, `DonutCard`, `Sparkline`, `PageHeader`, `ChartCard`) are
+bespoke compositions of oks-ui parts + `--app-*` design tokens. Pages never
+hand-roll these — they import from the barrel in `src/Components/ui/index.js`.
 
 Screens that are a list, form, detail, settings panel, board or report are
 **config objects** (`src/data/*.jsx`) rendered through a shared archetype page,
