@@ -4,9 +4,27 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-> Requires oks-ui ^1.1.2
+> Requires oks-ui ^1.3.2
 
 ## [Unreleased]
+
+## [1.1.2] — 2026-10-04
+
+### Changed
+
+- **Updated to oks-ui 1.3.2.** Brings the WCAG-AA colour work from 1.2 and the 1.3.2 contrast fix for muted text.
+- The dark theme now mirrors the blue, green, amber and red ramps, as oks-ui 1.2+ expects, so solid buttons,
+  avatars and chips keep readable labels in dark mode.
+
+### Fixed
+
+- **Text contrast meets 4.5:1 in both themes** (axe: 2,261 failures in light and 1,395 in dark across 153
+  screens, now none outside oks-ui's own demo output). Muted and subtle text, the sidebar's section headings, the
+  status colours and the primary colour used as text were all lifted.
+- Standalone pages (sign in, sign up, errors, maintenance) have a `<main>` landmark; the sidebar and the header
+  quick links are named navigation landmarks.
+- Card titles are `h2`, so heading order under each page title is no longer skipped.
+- The PIN field has a label, the chat thread can be scrolled with the keyboard, and the gallery labels are readable.
 
 ## [1.1.1] — 2026-09-01
 
