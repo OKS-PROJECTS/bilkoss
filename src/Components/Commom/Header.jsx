@@ -100,7 +100,7 @@ export default function Header({ onOpenSidebar }) {
         </div>
       </div>
 
-      <nav className="ml-6 hidden items-center gap-5 text-[13.5px] font-medium lg:flex" style={{ color: 'var(--app-fg-muted)' }}>
+      <nav aria-label="Quick links" className="ml-6 hidden items-center gap-5 text-[13.5px] font-medium lg:flex" style={{ color: 'var(--app-fg-muted)' }}>
         <span className="cursor-pointer hover:text-[var(--app-fg-strong)]">Mega Menu</span>
         <span className="cursor-pointer hover:text-[var(--app-fg-strong)]">Apps</span>
       </nav>

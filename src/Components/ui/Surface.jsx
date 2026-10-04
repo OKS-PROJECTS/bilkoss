@@ -25,9 +25,9 @@ export function CardHeader({ title, subtitle, actions, divider = true, className
     >
       <div className="min-w-0">
         {typeof title === 'string' ? (
-          <h3 className="text-[15px] font-medium" style={{ color: 'var(--app-fg-strong)' }}>
+          <h2 className="text-[15px] font-medium" style={{ color: 'var(--app-fg-strong)' }}>
             {title}
-          </h3>
+          </h2>
         ) : (
           title
         )}

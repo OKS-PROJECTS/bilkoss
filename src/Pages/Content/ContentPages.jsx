@@ -163,7 +163,7 @@ export function GalleryPage() {
               background: `linear-gradient(140deg, var(--app-${hues[i % hues.length]}), var(--app-${hues[(i + 2) % hues.length]}))`,
             }}
           >
-            <span className="text-[12px] font-semibold text-white/90">Asset {String(i + 1).padStart(2, '0')}</span>
+            <span className="rounded bg-black/70 px-1.5 py-0.5 text-[12px] font-semibold text-white">Asset {String(i + 1).padStart(2, '0')}</span>
           </div>
         ))}
       </div>

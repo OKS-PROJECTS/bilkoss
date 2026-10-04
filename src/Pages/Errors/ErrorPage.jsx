@@ -14,7 +14,7 @@ const PRESETS = {
 export default function ErrorPage({ code = 404 }) {
   const p = PRESETS[code] || PRESETS[404]
   return (
-    <div
+    <main
       className="flex min-h-full flex-col items-center justify-center px-6 py-16 text-center"
       style={{ background: 'var(--app-bg)' }}
     >
@@ -31,6 +31,6 @@ export default function ErrorPage({ code = 404 }) {
       <Button as={Link} to="/" color="primary" className="mt-6">
         Back to home
       </Button>
-    </div>
+    </main>
   )
 }

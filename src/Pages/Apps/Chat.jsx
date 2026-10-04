@@ -89,7 +89,7 @@ export default function Chat() {
               </div>
             </div>
 
-            <div className="flex-1 space-y-4 overflow-y-auto p-5" style={{ background: 'var(--app-surface-2)' }}>
+            <div role="region" aria-label="Conversation" tabIndex={0} className="flex-1 space-y-4 overflow-y-auto p-5" style={{ background: 'var(--app-surface-2)' }}>
               {THREAD.map((m, i) => (
                 <div key={i} className={`flex ${m.from === 'me' ? 'justify-end' : 'justify-start'}`}>
                   <div className="max-w-[70%]">
@@ -97,7 +97,7 @@ export default function Chat() {
                       className="rounded-2xl px-3.5 py-2 text-[13px]"
                       style={
                         m.from === 'me'
-                          ? { background: 'var(--app-primary)', color: '#fff', borderBottomRightRadius: 4 }
+                          ? { background: 'var(--oks-palette-brand-500)', color: '#fff', borderBottomRightRadius: 4 }
                           : { background: 'var(--app-surface)', color: 'var(--app-fg)', borderBottomLeftRadius: 4, border: '1px solid var(--app-border)' }
                       }
                     >

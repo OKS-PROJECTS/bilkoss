@@ -106,7 +106,7 @@ export default function Sidebar({ onNavigate }) {
       <div className="flex h-[65px] shrink-0 items-center px-4">
         <Logo onDark />
       </div>
-      <nav className="flex-1 space-y-px overflow-y-auto px-2.5 pt-1 pb-6">
+      <nav aria-label="Sidebar" className="flex-1 space-y-px overflow-y-auto px-2.5 pt-1 pb-6">
         {NAV.map((node, i) => (
           <NavNode key={`${node.label || node.heading}-${i}`} node={node} depth={0} onNavigate={onNavigate} />
         ))}

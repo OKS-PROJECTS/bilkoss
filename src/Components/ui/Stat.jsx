@@ -41,9 +41,9 @@ export function KpiCard({ label, value, trend, trendSuffix = '%', invertTrend = 
   return (
     <Surface bodyClassName="p-5">
       <div className="flex items-start justify-between gap-3">
-        <h5 className="text-[14px] font-semibold tracking-[0.04em] uppercase" style={{ color: 'var(--app-fg-subtle)' }}>
+        <h2 className="text-[14px] font-semibold tracking-[0.04em] uppercase" style={{ color: 'var(--app-fg-subtle)' }}>
           {label}
-        </h5>
+        </h2>
         {icon && (
           <span
             className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-[20px]"

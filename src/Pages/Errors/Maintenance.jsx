@@ -4,7 +4,7 @@ import { OksMark } from '../../Components/Commom/Logo'
 
 export default function Maintenance() {
   return (
-    <div
+    <main
       className="flex min-h-full flex-col items-center justify-center px-6 py-16 text-center"
       style={{ background: 'var(--app-bg)' }}
     >
@@ -24,6 +24,6 @@ export default function Maintenance() {
       <Button color="primary" variant="bordered" className="mt-6" onPress={() => window.location.reload()}>
         Retry now
       </Button>
-    </div>
+    </main>
   )
 }

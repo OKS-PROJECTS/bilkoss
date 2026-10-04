@@ -167,7 +167,7 @@ export function LoginPin() {
   return (
     <AuthSplit heading="Enter your PIN" sub="Use the 4-digit PIN linked to this device.">
       <Form onSubmit={() => nav('/dashboards/ecommerce')} className="space-y-5">
-        <OtpField name="pin" length={4} ui="single" />
+        <OtpField name="pin" label="PIN" length={4} ui="single" />
         <Button type="submit" color="primary" fullWidth>
           Continue
         </Button>

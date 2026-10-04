@@ -528,7 +528,7 @@ export function AiAssistant() {
           ].map((m, i) => (
             <div key={i} className={`flex ${m.r === 'u' ? 'justify-end' : ''}`}>
               <div className="max-w-[80%] rounded-2xl px-3.5 py-2 text-[13px]" style={m.r === 'u'
-                ? { background: 'var(--app-primary)', color: '#fff' }
+                ? { background: 'var(--oks-palette-brand-500)', color: '#fff' }
                 : { background: 'var(--app-surface)', border: '1px solid var(--app-border)', color: 'var(--app-fg)' }}>
                 {m.t}
               </div>

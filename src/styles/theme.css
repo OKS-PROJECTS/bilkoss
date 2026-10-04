@@ -61,7 +61,7 @@
   --oks-palette-success-300: #45d4b6;
   --oks-palette-success-400: #17c6a4;
   --oks-palette-success-500: #02bc9c;
-  --oks-palette-success-600: #029a80;
+  --oks-palette-success-600: #027c67;
   --oks-palette-success-700: #027865;
   --oks-palette-success-800: #015e50;
   --oks-palette-success-900: #014a40;
@@ -74,7 +74,7 @@
   --oks-palette-warning-400: #f9bf59;
   --oks-palette-warning-500: #f6ad2b;
   --oks-palette-warning-600: #d98f15;
-  --oks-palette-warning-700: #a86d10;
+  --oks-palette-warning-700: #9c650f;
   --oks-palette-warning-800: #79500e;
   --oks-palette-warning-900: #5f3f0c;
   --oks-palette-warning-950: #382504;
@@ -85,7 +85,7 @@
   --oks-palette-danger-300: #f483a1;
   --oks-palette-danger-400: #f7577e;
   --oks-palette-danger-500: #ee3767;
-  --oks-palette-danger-600: #d21a4d;
+  --oks-palette-danger-600: #ce194b;
   --oks-palette-danger-700: #a5133c;
   --oks-palette-danger-800: #79102e;
   --oks-palette-danger-900: #5f0f26;
@@ -131,8 +131,8 @@
 
   --app-fg-strong: #323a46;
   --app-fg: #4c4c5c;
-  --app-fg-muted: #7c828e;
-  --app-fg-subtle: #9ba6b7;
+  --app-fg-muted: #5f6673;
+  --app-fg-subtle: #6c717c;
 
   --app-card-radius: 0.3rem;
   --app-card-border: 0 solid var(--app-border);
@@ -140,7 +140,7 @@
 
   --app-menu-bg: #1e1f27;
   --app-menu-fg: #7a8ea7;
-  --app-menu-fg-muted: #6b7d94;
+  --app-menu-fg-muted: #7a899d;
   --app-menu-active-bg: #22232c;
   --app-menu-active-fg: #ced6df;
   --app-menu-hover-bg: #2f3742;
@@ -153,17 +153,17 @@
   --app-header-shadow: 0px 1px 4px 0px rgba(130, 143, 163, 0.15);
 
   /* role primitives + soft tints */
-  --app-accent: var(--oks-palette-brand-500);
+  --app-accent: var(--oks-palette-brand-600);
   --app-accent-soft: rgba(35, 109, 201, 0.12);
-  --app-ok: #02bc9c;
+  --app-ok: #017662;
   --app-ok-soft: rgba(2, 188, 156, 0.14);
-  --app-warn: #f6ad2b;
+  --app-warn: #8c6319;
   --app-warn-soft: rgba(246, 173, 43, 0.16);
-  --app-bad: #f7577e;
+  --app-bad: #b13e5a;
   --app-bad-soft: rgba(247, 87, 126, 0.14);
-  --app-violet: #7b70ef;
+  --app-violet: #6159bd;
   --app-violet-soft: rgba(123, 112, 239, 0.14);
-  --app-sky: #5bc3e1;
+  --app-sky: #357284;
   --app-sky-soft: rgba(91, 195, 225, 0.16);
 
   /* semantic aliases — reference other --app-* tokens so they cascade to dark */
@@ -201,23 +201,40 @@
 
   --app-fg-strong: #e5eaf0;
   --app-fg: #aab8c5;
-  --app-fg-muted: #8391a2;
-  --app-fg-subtle: #6b7686;
+  --app-fg-muted: #9aa6b6;
+  --app-fg-subtle: #89929f;
 
   --app-card-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.28);
 
   --app-menu-bg: #1e1f27;
   --app-menu-fg: #8495ab;
-  --app-menu-fg-muted: #6f7f95;
+  --app-menu-fg-muted: #7a899d;
   --app-menu-active-bg: #262a34;
   --app-menu-active-fg: #dfe6ee;
   --app-menu-hover-bg: #2b303b;
   --app-menu-hover-fg: #c5d3e4;
   --app-menu-border: #262730;
-  --app-menu-heading: #6f7f95;
+  --app-menu-heading: #7a899d;
 
   --app-header-bg: #1e1f27;
   --app-header-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.03);
+
+  /* oks-ui 1.2+ expects a theme-aware ramp: in dark the fill shades are the LIGHT ones and the
+     label on a fill is dark. Mirror the brand ramp so primary fills stay readable. */
+  --oks-palette-brand-50: #0d2039;  --oks-palette-brand-100: #13345d; --oks-palette-brand-200: #163f73;
+  --oks-palette-brand-300: #1a4f90; --oks-palette-brand-400: #1e5dab; --oks-palette-brand-500: #236dc9;
+  --oks-palette-brand-600: #4b85d4; --oks-palette-brand-700: #7ea9e0; --oks-palette-brand-800: #aecaed;
+  --oks-palette-brand-900: #d6e4f6; --oks-palette-brand-950: #eef4fb;
+  --app-accent: var(--oks-palette-brand-700);
+  --oks-palette-danger-50: #370713; --oks-palette-danger-100: #5f0f26; --oks-palette-danger-200: #79102e; --oks-palette-danger-300: #a5133c; --oks-palette-danger-400: #d21a4d; --oks-palette-danger-500: #ee3767; --oks-palette-danger-600: #f7577e; --oks-palette-danger-700: #f483a1; --oks-palette-danger-800: #f7afc2; --oks-palette-danger-900: #fbd7e0; --oks-palette-danger-950: #fdeef2;
+  /* mirrored success + warning ramps (oks-ui 1.2+ expects fills to be the light shades in dark) */
+  --oks-palette-success-50: #002c26; --oks-palette-success-100: #014a40; --oks-palette-success-200: #015e50; --oks-palette-success-300: #027865; --oks-palette-success-400: #029a80; --oks-palette-success-500: #02bc9c; --oks-palette-success-600: #17c6a4; --oks-palette-success-700: #45d4b6; --oks-palette-success-800: #86e6d0; --oks-palette-success-900: #c0f2e7; --oks-palette-success-950: #e4faf5;
+  --oks-palette-warning-50: #382504; --oks-palette-warning-100: #5f3f0c; --oks-palette-warning-200: #79500e; --oks-palette-warning-300: #9c650f; --oks-palette-warning-400: #d98f15; --oks-palette-warning-500: #f6ad2b; --oks-palette-warning-600: #f9bf59; --oks-palette-warning-700: #facb74; --oks-palette-warning-800: #fbdc9b; --oks-palette-warning-900: #fdecc9; --oks-palette-warning-950: #fef7ea;
+  --app-ok: #02bc9c;
+  --app-warn: #f6ad2b;
+  --app-bad: #f87091;
+  --app-violet: #7b70ef;
+  --app-sky: #5bc3e1;
 
   --app-accent-soft: rgba(75, 133, 212, 0.2);
   --app-ok-soft: rgba(2, 188, 156, 0.18);

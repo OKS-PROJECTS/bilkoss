@@ -91,9 +91,9 @@ export default function EcommerceDashboard() {
           <Surface padded={false} className="overflow-hidden">
             <div className="flex items-start justify-between gap-2 p-5">
               <div>
-                <h3 className="text-[14px] font-semibold tracking-[0.04em] whitespace-nowrap uppercase" style={{ color: 'var(--app-fg-subtle)' }}>
+                <h2 className="text-[14px] font-semibold tracking-[0.04em] whitespace-nowrap uppercase" style={{ color: 'var(--app-fg-subtle)' }}>
                   Good Day,
-                </h3>
+                </h2>
                 <p className="font-display mt-2 text-[22px] leading-tight font-bold whitespace-nowrap" style={{ color: 'var(--app-fg-strong)' }}>
                   David Dev!
                 </p>
@@ -195,9 +195,9 @@ export default function EcommerceDashboard() {
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Surface padded={false}>
           <div className="flex items-center justify-between px-5 py-[15px]">
-            <h3 className="font-display text-[15px] font-medium" style={{ color: 'var(--app-fg-strong)' }}>
+            <h2 className="font-display text-[15px] font-medium" style={{ color: 'var(--app-fg-strong)' }}>
               Sales Report <span className="font-normal" style={{ color: 'var(--app-fg-subtle)' }}>(25,822 Orders)</span>
-            </h3>
+            </h2>
           </div>
           <div className="grid grid-cols-3 border-y border-dashed" style={{ borderColor: 'var(--app-border)' }}>
             {RANGE_TABS.map((t) => (

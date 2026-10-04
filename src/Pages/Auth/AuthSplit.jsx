@@ -8,7 +8,7 @@ import Logo from '../../Components/Commom/Logo'
 export default function AuthSplit({ heading, sub, children, footer }) {
   return (
     <div className="grid min-h-full lg:grid-cols-2" style={{ background: 'var(--app-surface)' }}>
-      <div className="flex flex-col justify-center px-6 py-12 sm:px-12 lg:px-20">
+      <main className="flex flex-col justify-center px-6 py-12 sm:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-sm">
           <Logo to="/" />
           <h1 className="mt-10 text-[22px] font-bold" style={{ color: 'var(--app-fg-strong)' }}>
@@ -29,9 +29,9 @@ export default function AuthSplit({ heading, sub, children, footer }) {
             © {new Date().getFullYear()} Bilkoss — built with oks-ui
           </p>
         </div>
-      </div>
+      </main>
 
-      <div
+      <aside
         className="relative hidden items-center justify-center overflow-hidden lg:flex"
         style={{
           background:
@@ -50,7 +50,7 @@ export default function AuthSplit({ heading, sub, children, footer }) {
             CSS-variable component library.
           </p>
         </div>
-      </div>
+      </aside>
     </div>
   )
 }
